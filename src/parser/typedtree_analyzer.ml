@@ -58,7 +58,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
   
   method private analyze_binding vb =
     match vb.vb_pat.pat_desc with
-    | Tpat_var (id, _) ->
+    | Tpat_var (id, _, _) ->
         let name = Ident.name id in
         if self#is_sensitive_name name then
           ctx.tainted_values <- id :: ctx.tainted_values;
