@@ -1,4 +1,4 @@
-open Types
+module Linter_types = Types
 open Utils
 open Typedtree
 
@@ -6,7 +6,7 @@ type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
   args: (Asttypes.arg_label * Typedtree.expression) list;
-  return_type: type_expr;
+  return_type: Types.type_expr; (* Use compiler-libs Types module *)
 }
 
 type security_context = {
@@ -142,9 +142,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method private report_hardcoded_key loc name =
     let finding = {
       rule_id = "CRYPTO_TYPED_001";
-      severity = Critical;
+      severity = Linter_types.Critical;
       message = Printf.sprintf "Hardcoded %s detected in typed AST" name;
-      vulnerability = HardcodedKey;
+      vulnerability = Linter_types.HardcodedKey;
       location = {
         file = loc.loc_start.pos_fname;
         line = loc.loc_start.pos_lnum;
@@ -161,9 +161,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method private report_weak_hash algo loc =
     let finding = {
       rule_id = "CRYPTO_TYPED_002";
-      severity = Error;
+      severity = Linter_types.Error;
       message = Printf.sprintf "Weak hash algorithm %s detected" algo;
-      vulnerability = WeakHash (if String.contains algo "md5" then "MD5" else "SHA1");
+      vulnerability = Linter_types.WeakHash (if String.contains algo "md5" then "MD5" else "SHA1");
       location = {
         file = loc.loc_start.pos_fname;
         line = loc.loc_start.pos_lnum;
@@ -179,9 +179,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method private report_weak_key_size bits loc =
     let finding = {
       rule_id = "CRYPTO_TYPED_003";
-      severity = Error;
+      severity = Linter_types.Error;
       message = Printf.sprintf "Weak key size: %d bits" bits;
-      vulnerability = InsecureKeySize bits;
+      vulnerability = Linter_types.InsecureKeySize bits;
       location = {
         file = loc.loc_start.pos_fname;
         line = loc.loc_start.pos_lnum;
@@ -197,9 +197,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method private report_nonce_reuse name loc =
     let finding = {
       rule_id = "CRYPTO_TYPED_004";
-      severity = Critical;
+      severity = Linter_types.Critical;
       message = Printf.sprintf "Nonce '%s' is reused in GCM mode" name;
-      vulnerability = NonceReuse;
+      vulnerability = Linter_types.NonceReuse;
       location = {
         file = loc.loc_start.pos_fname;
         line = loc.loc_start.pos_lnum;

@@ -163,7 +163,7 @@ module Sarif = struct
               ("name", `String "ocaml-crypto-linter");
               ("version", `String "0.1.0");
               ("informationUri", `String "https://github.com/your-username/ocaml-crypto-linter");
-              ("rules", `List rules);
+              ("rules", `List (rules : Yojson.Safe.t list));
               ("supportedTaxonomies", `List [
                 `Assoc [
                   ("name", `String "CWE");
