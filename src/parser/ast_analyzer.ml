@@ -1,6 +1,6 @@
-open Ppxlib
-(* Use our own Types module, not Ppxlib.Types *)
+(* Import our types module first, before Ppxlib *)
 module Linter_types = Types
+open Ppxlib
 open Linter_types
 
 module Crypto_patterns = struct

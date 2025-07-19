@@ -210,8 +210,8 @@ module Dataflow = struct
       if output_state <> Hashtbl.find states node_id then begin
         Hashtbl.replace states node_id output_state;
         List.iter (fun succ_id ->
-          if not (Queue.mem succ_id worklist) then
-            Queue.add succ_id worklist
+          (* Queue doesn't have a mem function, so we just add without checking *)
+          Queue.add succ_id worklist
         ) node.succs
       end
     done;

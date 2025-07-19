@@ -117,7 +117,7 @@ module Sarif = struct
         | None -> `List [])
     ]
   
-  let create_sarif_report result =
+  let create_sarif_report result : Yojson.Safe.t =
     (* Deduplicate rules *)
     let rules = 
       List.fold_left (fun acc finding ->
@@ -240,9 +240,9 @@ end
 let write_sarif_report ~output_file result =
   let sarif = Sarif.create_sarif_report result in
   let out_chan = open_out output_file in
-  Yojson.Safe.pretty_to_channel out_chan (sarif :> Yojson.Safe.t);
+  Yojson.Safe.pretty_to_channel out_chan sarif;
   close_out out_chan
 
 let print_sarif result =
   let sarif = Sarif.create_sarif_report result in
-  Yojson.Safe.pretty_to_channel stdout (sarif :> Yojson.Safe.t)
+  Yojson.Safe.pretty_to_channel stdout sarif

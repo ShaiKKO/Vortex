@@ -136,7 +136,7 @@ end
 module Interprocedural_analyzer = struct
   type context = {
     call_graph: Call_graph.t;
-    current_function: string option;
+    mutable current_function: string option;
     taint_states: (string, Taint_analysis.taint_state) Hashtbl.t;
     crypto_patterns: string list;
   }
