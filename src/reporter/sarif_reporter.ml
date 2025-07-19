@@ -14,21 +14,21 @@ module Sarif = struct
     | Error -> "error"
   
   let vulnerability_to_tags = function
-    | WeakCipher _ -> ["security", "cryptography", "CWE-327"]
-    | InsecureKeySize _ -> ["security", "cryptography", "CWE-326"]
-    | HardcodedKey -> ["security", "cryptography", "CWE-798"]
-    | PredictableIV -> ["security", "cryptography", "CWE-329"]
-    | WeakRandom -> ["security", "cryptography", "CWE-338"]
-    | NonceReuse -> ["security", "cryptography", "CWE-323"]
-    | WeakHash _ -> ["security", "cryptography", "CWE-328"]
-    | InsecurePadding -> ["security", "cryptography", "CWE-310"]
-    | TimingLeak -> ["security", "cryptography", "CWE-208"]
-    | SideChannel -> ["security", "cryptography", "CWE-203"]
-    | KeyReuse -> ["security", "cryptography", "CWE-323"]
-    | MacMissing -> ["security", "cryptography", "CWE-353"]
-    | MissingAuthentication -> ["security", "cryptography", "CWE-353"]
-    | WeakKDF -> ["security", "cryptography", "CWE-916"]
-    | InsecureMode _ -> ["security", "cryptography", "CWE-327"]
+    | WeakCipher _ -> ["security"; "cryptography"; "CWE-327"]
+    | InsecureKeySize _ -> ["security"; "cryptography"; "CWE-326"]
+    | HardcodedKey -> ["security"; "cryptography"; "CWE-798"]
+    | PredictableIV -> ["security"; "cryptography"; "CWE-329"]
+    | WeakRandom -> ["security"; "cryptography"; "CWE-338"]
+    | NonceReuse -> ["security"; "cryptography"; "CWE-323"]
+    | WeakHash _ -> ["security"; "cryptography"; "CWE-328"]
+    | InsecurePadding -> ["security"; "cryptography"; "CWE-310"]
+    | TimingLeak -> ["security"; "cryptography"; "CWE-208"]
+    | SideChannel -> ["security"; "cryptography"; "CWE-203"]
+    | KeyReuse -> ["security"; "cryptography"; "CWE-323"]
+    | MacMissing -> ["security"; "cryptography"; "CWE-353"]
+    | MissingAuthentication -> ["security"; "cryptography"; "CWE-353"]
+    | WeakKDF -> ["security"; "cryptography"; "CWE-916"]
+    | InsecureMode _ -> ["security"; "cryptography"; "CWE-327"]
   
   let create_rule finding : Yojson.Safe.t =
     `Assoc [

@@ -11,7 +11,7 @@ type crypto_api_call = {
 type security_context = {
   mutable crypto_calls: crypto_api_call list;
   mutable key_flows: (Ident.t * Location.t list) list;
-  mutable iv_usage: (Ident.t * int) Hashtbl.t;
+  mutable iv_usage: (Ident.t, int) Hashtbl.t;
   mutable tainted_values: Ident.t list;
 }
 
