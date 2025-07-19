@@ -1,0 +1,18 @@
+# Authors
+
+OCaml Crypto Linter is developed and maintained by:
+
+## Lead Developer
+- Shaiiko <shaiiko@proton.me>
+
+## Contributors
+Contributors will be added here as the project grows.
+
+## Acknowledgments
+This project builds upon ideas and research from:
+- The OCaml security community
+- Semgrep pattern matching technology
+- Cryptographic best practices research
+
+For a full list of contributors, see:
+https://github.com/ShaiKKO/Vortex/graphs/contributors

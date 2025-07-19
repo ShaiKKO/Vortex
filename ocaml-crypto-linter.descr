@@ -1,0 +1,15 @@
+Static analysis for OCaml cryptographic code
+
+OCaml Crypto Linter is a comprehensive security tool that detects
+cryptographic vulnerabilities in OCaml codebases. It performs deep
+AST analysis with interprocedural dataflow tracking to identify:
+
+- Weak cryptographic algorithms (DES, MD5, SHA1)
+- Hardcoded keys and secrets
+- Timing attack vulnerabilities
+- API misuse patterns
+- Outdated crypto library dependencies
+
+The tool integrates seamlessly with OCaml build systems and CI/CD
+pipelines, providing multiple output formats including JSON and SARIF
+for security dashboards.

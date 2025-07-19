@@ -39,5 +39,6 @@
 (package
  (name ocaml-crypto-linter-rules)
  (synopsis "Pluggable cryptographic vulnerability rules for ocaml-crypto-linter")
+ (allow_empty)
  (depends
   ocaml-crypto-linter))

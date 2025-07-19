@@ -1,0 +1,47 @@
+# Build artifacts
+_build/
+*.exe
+*.o
+*.cmo
+*.cmi
+*.cmx
+*.cma
+*.cmxa
+*.a
+
+# OPAM
+_opam/
+*.install
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test artifacts
+_coverage/
+*.coverage
+bisect*.out
+
+# Release artifacts
+release/
+*.tar.gz
+*.tar.gz.sha256
+RELEASE_NOTES_*.md
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Documentation
+_doc/
+*.odoc
+
+# Dune
+.merlin-conf/
+.merlin
