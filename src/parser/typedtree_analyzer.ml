@@ -5,7 +5,7 @@ open Typedtree
 type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
-  args: (Asttypes.arg_label * Typedtree.expression) list;
+  args: (Asttypes.arg_label * Typedtree.expression option) list;
 }
 
 type security_context = {
