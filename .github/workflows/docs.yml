@@ -1,0 +1,149 @@
+name: Documentation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-docs:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Install dependencies
+        run: |
+          opam install . --deps-only --with-doc -y
+          opam install odoc mdx -y
+
+      - name: Build API documentation
+        run: |
+          opam exec -- dune build @doc
+          cp -r _build/default/_doc/_html docs/api
+
+      - name: Build user documentation
+        run: |
+          # Convert markdown to HTML
+          opam install omd -y
+          mkdir -p docs/user
+          
+          for file in docs/*.md; do
+            basename=$(basename "$file" .md)
+            opam exec -- omd < "$file" > "docs/user/$basename.html"
+          done
+
+      - name: Generate rule documentation
+        run: |
+          mkdir -p docs/rules
+          opam exec -- dune exec bin/main.exe -- --list-rules --format markdown > docs/rules/index.md
+
+      - name: Create documentation index
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>OCaml Crypto Linter Documentation</title>
+              <style>
+                  body { font-family: sans-serif; margin: 40px; }
+                  h1 { color: #333; }
+                  .section { margin: 20px 0; }
+                  a { color: #0066cc; text-decoration: none; }
+                  a:hover { text-decoration: underline; }
+              </style>
+          </head>
+          <body>
+              <h1>OCaml Crypto Linter Documentation</h1>
+              
+              <div class="section">
+                  <h2>Getting Started</h2>
+                  <ul>
+                      <li><a href="user/README.html">Overview</a></li>
+                      <li><a href="user/installation.html">Installation Guide</a></li>
+                      <li><a href="user/quickstart.html">Quick Start</a></li>
+                  </ul>
+              </div>
+              
+              <div class="section">
+                  <h2>User Guide</h2>
+                  <ul>
+                      <li><a href="user/cli-usage.html">Command Line Usage</a></li>
+                      <li><a href="user/configuration.html">Configuration</a></li>
+                      <li><a href="user/integrations.html">IDE & CI Integrations</a></li>
+                  </ul>
+              </div>
+              
+              <div class="section">
+                  <h2>Reference</h2>
+                  <ul>
+                      <li><a href="api/index.html">API Documentation</a></li>
+                      <li><a href="rules/index.html">Security Rules Catalog</a></li>
+                      <li><a href="user/output-formats.html">Output Formats</a></li>
+                  </ul>
+              </div>
+              
+              <div class="section">
+                  <h2>Development</h2>
+                  <ul>
+                      <li><a href="user/contributing.html">Contributing Guide</a></li>
+                      <li><a href="user/architecture.html">Architecture Overview</a></li>
+                      <li><a href="user/writing-rules.html">Writing Custom Rules</a></li>
+                  </ul>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: docs/
+
+  deploy-docs:
+    name: Deploy to GitHub Pages
+    needs: build-docs
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download documentation
+        uses: actions/download-artifact@v4
+        with:
+          name: documentation
+          path: docs/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload to Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

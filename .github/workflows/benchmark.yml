@@ -1,0 +1,154 @@
+name: Performance Benchmark
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  deployments: write
+  pull-requests: write
+
+jobs:
+  benchmark:
+    name: Run Performance Benchmarks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+          dune-cache: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgmp-dev pkg-config
+          opam install . --deps-only -y
+          opam install core_bench benchmark -y
+
+      - name: Build benchmarks
+        run: |
+          opam exec -- dune build bench/
+
+      - name: Run benchmarks
+        run: |
+          opam exec -- dune exec bench/bench.exe -- -quota 10s -ascii > benchmark-results.txt
+
+      - name: Store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: OCaml Crypto Linter Benchmarks
+          tool: 'customBiggerIsBetter'
+          output-file-path: benchmark-results.txt
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          auto-push: true
+          alert-threshold: '110%'
+          comment-on-alert: true
+          fail-on-alert: false
+          alert-comment-cc-users: '@ShaiKKO'
+
+      - name: Comment PR with performance impact
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('benchmark-results.txt', 'utf8');
+            
+            const comment = `## ⚡ Performance Benchmark Results
+            
+            \`\`\`
+            ${results.slice(0, 1000)}
+            \`\`\`
+            
+            [View full benchmark history](https://shaikko.github.io/Vortex/ocaml-crypto-linter/dev/bench/)`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  memory-profile:
+    name: Memory Usage Profile
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgmp-dev pkg-config valgrind
+          opam install . --deps-only -y
+          opam install memtrace -y
+
+      - name: Build with memory profiling
+        run: |
+          opam exec -- dune build --profile release
+
+      - name: Run memory profiling
+        run: |
+          opam exec -- valgrind --tool=massif --massif-out-file=massif.out \
+            _build/default/bin/main.exe validation/*.ml || true
+          
+          ms_print massif.out > memory-profile.txt
+
+      - name: Upload memory profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: memory-profile
+          path: |
+            massif.out
+            memory-profile.txt
+
+  parallel-performance:
+    name: Parallel Processing Performance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgmp-dev pkg-config
+          opam install . --deps-only -y
+
+      - name: Test parallel performance
+        run: |
+          echo "Testing with different domain counts..."
+          
+          for domains in 1 2 4 8; do
+            echo "Domains: $domains"
+            time OCAML_CRYPTO_LINTER_DOMAINS=$domains \
+              opam exec -- dune exec bin/main.exe -- \
+              validation/*.ml -f json -o /dev/null
+          done > parallel-performance.txt 2>&1
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        with:
+          name: parallel-performance
+          path: parallel-performance.txt

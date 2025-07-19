@@ -1,0 +1,5 @@
+(executable
+ (public_name ocaml-crypto-linter)
+ (package ocaml-crypto-linter)
+ (name main)
+ (libraries ocaml_crypto_linter cmdliner))

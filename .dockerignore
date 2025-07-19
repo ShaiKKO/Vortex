@@ -1,0 +1,56 @@
+# Version control
+.git
+.gitignore
+
+# Build artifacts
+_build/
+*.exe
+*.o
+*.cmo
+*.cmi
+*.cmx
+*.cma
+*.cmxa
+*.a
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+*.md
+LICENSE
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Test files
+test/
+validation/
+coverage/
+*.coverage
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Docker files (except Dockerfile)
+.dockerignore
+docker-compose.yml
+
+# Package files
+*.opam.locked
+_opam/

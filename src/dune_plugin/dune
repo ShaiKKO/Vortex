@@ -1,0 +1,7 @@
+(include_subdirs no)
+
+(library
+ (name dune_crypto_linter)
+ (public_name ocaml-crypto-linter.dune-plugin)
+ (libraries dune-plugin)
+ (optional))

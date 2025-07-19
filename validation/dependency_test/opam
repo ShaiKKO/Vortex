@@ -1,0 +1,39 @@
+opam-version: "2.0"
+name: "vulnerable-crypto-app"
+version: "1.0.0"
+synopsis: "Test app with vulnerable crypto dependencies"
+maintainer: "test@example.com"
+authors: ["Test Author"]
+license: "MIT"
+homepage: "https://github.com/test/vulnerable-app"
+bug-reports: "https://github.com/test/vulnerable-app/issues"
+depends: [
+  "ocaml" {>= "4.08.0"}
+  "dune" {>= "2.0"}
+  
+  # Vulnerable crypto libraries
+  "cryptokit" {= "1.16.0"}  # CVE-2022-24793: RSA timing attack in < 1.16.1
+  "nocrypto" {>= "0.5.4"}   # Deprecated and unmaintained since 2019
+  "ssl" {= "0.5.9"}         # Old OCaml SSL bindings with issues
+  
+  # Libraries with known issues
+  "lwt" {< "5.4.0"}         # Older version with security fixes in newer versions
+  "cohttp" {< "2.5.0"}      # HTTP library with security improvements in newer versions
+  
+  # Weak dependency constraints allowing downgrade
+  "mirage-crypto" {>= "0.8.0"}  # Should require >= 0.10.0 for security fixes
+  "x509" {>= "0.11.0"}          # Should require >= 0.14.0 for security fixes
+  
+  # Missing security-critical dependencies
+  # Should have: "eqaf" for constant-time operations
+  # Should have: "domain-name" {>= "0.3.0"} for secure domain validation
+]
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+
+# Missing: security advisory pins
+# Should have:
+# pin-depends: [
+#   ["cryptokit.1.16.1" "git+https://github.com/xavierleroy/cryptokit.git#security-fix"]
+# ]

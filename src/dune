@@ -1,0 +1,26 @@
+(include_subdirs unqualified)
+
+(library
+ (name ocaml_crypto_linter)
+ (public_name ocaml-crypto-linter)
+ (modules :standard \ parallel_stubs)
+ (libraries
+  compiler-libs.common
+  ppxlib
+  yojson
+  lwt
+  lwt.unix
+  cryptokit
+  nocrypto
+  cmdliner
+  unix
+  threads.posix)
+ (preprocess
+  (pps ppxlib.metaquot)))
+
+(library
+ (name parallel_stubs)
+ (modules parallel_stubs)
+ (foreign_stubs
+  (language c)
+  (names parallel_stubs)))

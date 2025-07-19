@@ -1,0 +1,168 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  issues: write
+
+jobs:
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Install dependencies
+        run: |
+          opam install . --deps-only -y
+
+      - name: Run OPAM security audit
+        run: |
+          opam list --installed > installed-packages.txt
+          echo "Installed packages:"
+          cat installed-packages.txt
+
+      - name: Check for known vulnerabilities
+        run: |
+          # Check against known vulnerable versions
+          if grep -E "(nocrypto.*0\.[0-4]\.|cryptokit.*1\.[0-9]\.)" installed-packages.txt; then
+            echo "::warning::Found potentially vulnerable crypto library versions"
+          fi
+
+  codeql-analysis:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'ocaml'
+          queries: security-extended
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Build
+        run: |
+          opam install . --deps-only -y
+          opam exec -- dune build
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  sarif-upload:
+    name: SARIF Security Results
+    runs-on: ubuntu-latest
+    needs: dependency-scan
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OCaml
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.x
+
+      - name: Build and run linter
+        run: |
+          opam install . --deps-only -y
+          opam exec -- dune build
+          opam exec -- dune exec bin/main.exe -- src/ -f sarif -o security-scan.sarif || true
+
+      - name: Upload SARIF results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: security-scan.sarif
+          category: ocaml-crypto-linter
+
+  trivy-scan:
+    name: Trivy Container Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          ignore-unfixed: true
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: 'trivy'
+
+  create-security-report:
+    name: Create Security Report
+    runs-on: ubuntu-latest
+    needs: [dependency-scan, codeql-analysis, sarif-upload, trivy-scan]
+    if: github.event_name == 'schedule'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate security report
+        run: |
+          echo "# Security Scan Report" > security-report.md
+          echo "Date: $(date)" >> security-report.md
+          echo "" >> security-report.md
+          echo "## Summary" >> security-report.md
+          echo "- Dependency scan: ✅ Completed" >> security-report.md
+          echo "- CodeQL analysis: ✅ Completed" >> security-report.md
+          echo "- SARIF upload: ✅ Completed" >> security-report.md
+          echo "- Trivy scan: ✅ Completed" >> security-report.md
+
+      - name: Create issue if vulnerabilities found
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Security Scan Report - ${new Date().toISOString().split('T')[0]}`;
+            const body = `A scheduled security scan has completed. Please review the results in the Security tab.
+            
+            ## Actions Required
+            - [ ] Review dependency vulnerabilities
+            - [ ] Check CodeQL findings
+            - [ ] Analyze SARIF results
+            - [ ] Address any critical issues
+            
+            [View Security Alerts](https://github.com/${{ github.repository }}/security)`;
+            
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['security', 'automated']
+            });

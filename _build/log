@@ -1,0 +1,15 @@
+# dune build src/common/types.cmo
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /Users/shaiiko/.cache/dune/db
+# Workspace root: /Users/shaiiko/Desktop/Projects/Vortex/ocaml-crypto-linter
+# Auto-detected concurrency: 10
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }

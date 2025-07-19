@@ -1,0 +1,135 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        ocaml-compiler:
+          - "4.14"
+          - "5.1"
+          - "5.2"
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: ${{ matrix.ocaml-compiler }}
+    
+    - name: Install dependencies
+      run: |
+        opam install . --deps-only --with-test --with-doc -y
+        opam install semgrep -y
+    
+    - name: Build
+      run: opam exec -- dune build
+    
+    - name: Run tests
+      run: opam exec -- dune runtest
+    
+    - name: Check formatting
+      run: opam exec -- dune build @fmt
+    
+    - name: Build documentation
+      run: opam exec -- dune build @doc
+    
+    - name: Run crypto linter on examples
+      run: |
+        opam exec -- dune exec bin/main.exe -- test/examples/*.ml -f json -o lint-report.json
+    
+    - name: Upload lint report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: crypto-lint-report-${{ matrix.os }}-${{ matrix.ocaml-compiler }}
+        path: lint-report.json
+
+  lint-self:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: "5.1"
+    
+    - name: Install dependencies
+      run: opam install . --deps-only -y
+    
+    - name: Build linter
+      run: opam exec -- dune build
+    
+    - name: Run linter on itself
+      run: |
+        opam exec -- dune exec bin/main.exe -- src/**/*.ml -f json -o self-lint-report.json || true
+    
+    - name: Comment PR with results
+      uses: actions/github-script@v7
+      if: github.event_name == 'pull_request'
+      with:
+        script: |
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('self-lint-report.json', 'utf8'));
+          const summary = report.summary;
+          
+          const comment = `## 🔍 Crypto Linter Results
+          
+          - **Critical**: ${summary.critical}
+          - **Errors**: ${summary.errors}
+          - **Warnings**: ${summary.warnings}
+          - **Info**: ${summary.info}
+          
+          Total findings: ${summary.total_findings}`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          });
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup OCaml
+      uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-compiler: "5.1"
+    
+    - name: Install dependencies
+      run: |
+        opam install . --deps-only --with-test -y
+        opam install bisect_ppx -y
+    
+    - name: Build with coverage
+      run: |
+        BISECT_ENABLE=yes opam exec -- dune build
+        BISECT_ENABLE=yes opam exec -- dune runtest
+    
+    - name: Generate coverage report
+      run: |
+        opam exec -- bisect-ppx-report html
+        opam exec -- bisect-ppx-report summary
+    
+    - name: Upload coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: _coverage/

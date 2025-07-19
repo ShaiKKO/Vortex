@@ -1,0 +1,591 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "OCaml Crypto Linter",
+          "version": "0.2.0",
+          "informationUri": "https://github.com/ocaml-crypto-linter",
+          "rules": [
+            {
+              "id": "KEY001",
+              "name": "Hardcoded RSA private key material",
+              "shortDescription": {
+                "text": "Hardcoded RSA private key material"
+              },
+              "help": {
+                "text": "Use secure key management: Load keys from environment variables or secure key stores"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "SIDE002",
+              "name": "RSA decryption vulnerable to timing attacks (CVE-2",
+              "shortDescription": {
+                "text": "RSA decryption vulnerable to timing attacks (CVE-2022-24793)"
+              },
+              "help": {
+                "text": "Update Cryptokit to >= 1.16.1 which includes timing attack mitigations"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "medium"
+              }
+            },
+            {
+              "id": "SIDE001",
+              "name": "Variable-time string comparison of cryptographic s",
+              "shortDescription": {
+                "text": "Variable-time string comparison of cryptographic signature"
+              },
+              "help": {
+                "text": "Use Eqaf.equal for constant-time comparison"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "API001",
+              "name": "ECB mode usage for password encryption",
+              "shortDescription": {
+                "text": "ECB mode usage for password encryption"
+              },
+              "help": {
+                "text": "Use AES-GCM or AES-CTR with authentication"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "ALGO001",
+              "name": "Weak cipher DES detected (CVE-2016-2183 SWEET32)",
+              "shortDescription": {
+                "text": "Weak cipher DES detected (CVE-2016-2183 SWEET32)"
+              },
+              "help": {
+                "text": "Replace with AES-256-GCM"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "ALGO002",
+              "name": "MD5 used for password hashing",
+              "shortDescription": {
+                "text": "MD5 used for password hashing - completely broken"
+              },
+              "help": {
+                "text": "Use Argon2id or scrypt for password hashing"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "KEY002",
+              "name": "Predictable all-zero IV for CBC encryption",
+              "shortDescription": {
+                "text": "Predictable all-zero IV for CBC encryption"
+              },
+              "help": {
+                "text": "Generate random IV with Mirage_crypto_rng.generate 16"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "API002",
+              "name": "MAC-then-Encrypt pattern vulnerable to Lucky Thirt",
+              "shortDescription": {
+                "text": "MAC-then-Encrypt pattern vulnerable to Lucky Thirteen"
+              },
+              "help": {
+                "text": "Use Encrypt-then-MAC pattern"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "medium"
+              }
+            },
+            {
+              "id": "DOS001",
+              "name": "MD5 hash table vulnerable to collision DoS attacks",
+              "shortDescription": {
+                "text": "MD5 hash table vulnerable to collision DoS attacks"
+              },
+              "help": {
+                "text": "Use SipHash or BLAKE2 for hash tables with untrusted input"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "DOS002",
+              "name": "Unbounded file loading can cause memory exhaustion",
+              "shortDescription": {
+                "text": "Unbounded file loading can cause memory exhaustion"
+              },
+              "help": {
+                "text": "Process files in chunks with streaming API"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "DOS003",
+              "name": "ReDoS vulnerability in email validation regex",
+              "shortDescription": {
+                "text": "ReDoS vulnerability in email validation regex"
+              },
+              "help": {
+                "text": "Use linear-time email validation or limit input size"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "DEP001",
+              "name": "Cryptokit 1.16.0 has CVE-2022-24793 (RSA timing at",
+              "shortDescription": {
+                "text": "Cryptokit 1.16.0 has CVE-2022-24793 (RSA timing attack)"
+              },
+              "help": {
+                "text": "Update to cryptokit >= 1.16.1"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            },
+            {
+              "id": "DEP002",
+              "name": "Nocrypto is deprecated and unmaintained since 2019",
+              "shortDescription": {
+                "text": "Nocrypto is deprecated and unmaintained since 2019"
+              },
+              "help": {
+                "text": "Migrate to mirage-crypto"
+              },
+              "properties": {
+                "tags": [
+                  "security",
+                  "cryptography"
+                ],
+                "precision": "high"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "KEY001",
+          "level": "error",
+          "message": {
+            "text": "Hardcoded RSA private key material"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.99,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "SIDE002",
+          "level": "error",
+          "message": {
+            "text": "RSA decryption vulnerable to timing attacks (CVE-2022-24793)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.85,
+            "priority": 8
+          }
+        },
+        {
+          "ruleId": "SIDE001",
+          "level": "error",
+          "message": {
+            "text": "Variable-time string comparison of cryptographic signature"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 17
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.9,
+            "priority": 9
+          }
+        },
+        {
+          "ruleId": "API001",
+          "level": "error",
+          "message": {
+            "text": "ECB mode usage for password encryption"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.95,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "ALGO001",
+          "level": "error",
+          "message": {
+            "text": "Weak cipher DES detected (CVE-2016-2183 SWEET32)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.95,
+            "priority": 9
+          }
+        },
+        {
+          "ruleId": "ALGO002",
+          "level": "error",
+          "message": {
+            "text": "MD5 used for password hashing - completely broken"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 52
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.98,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "KEY002",
+          "level": "error",
+          "message": {
+            "text": "Predictable all-zero IV for CBC encryption"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_cryptokit_examples.ml"
+                },
+                "region": {
+                  "startLine": 46
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.92,
+            "priority": 8
+          }
+        },
+        {
+          "ruleId": "SIDE001",
+          "level": "error",
+          "message": {
+            "text": "PKCS#1 decryption timing leak enables Bleichenbacher attack"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_tls_patterns.ml"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.88,
+            "priority": 9
+          }
+        },
+        {
+          "ruleId": "API002",
+          "level": "error",
+          "message": {
+            "text": "MAC-then-Encrypt pattern vulnerable to Lucky Thirteen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_tls_patterns.ml"
+                },
+                "region": {
+                  "startLine": 95
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.85,
+            "priority": 8
+          }
+        },
+        {
+          "ruleId": "ALGO001",
+          "level": "error",
+          "message": {
+            "text": "RC4 cipher support - completely broken"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vulnerable_tls_patterns.ml"
+                },
+                "region": {
+                  "startLine": 147
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.97,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "DOS001",
+          "level": "error",
+          "message": {
+            "text": "MD5 hash table vulnerable to collision DoS attacks"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hash_collision_dos.ml"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.93,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "DOS002",
+          "level": "error",
+          "message": {
+            "text": "Unbounded file loading can cause memory exhaustion"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hash_collision_dos.ml"
+                },
+                "region": {
+                  "startLine": 55
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.87,
+            "priority": 8
+          }
+        },
+        {
+          "ruleId": "DOS003",
+          "level": "error",
+          "message": {
+            "text": "ReDoS vulnerability in email validation regex"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "hash_collision_dos.ml"
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.91,
+            "priority": 9
+          }
+        },
+        {
+          "ruleId": "DEP001",
+          "level": "error",
+          "message": {
+            "text": "Cryptokit 1.16.0 has CVE-2022-24793 (RSA timing attack)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "dependency_test/opam"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.99,
+            "priority": 10
+          }
+        },
+        {
+          "ruleId": "DEP002",
+          "level": "error",
+          "message": {
+            "text": "Nocrypto is deprecated and unmaintained since 2019"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "dependency_test/opam"
+                },
+                "region": {
+                  "startLine": 14
+                }
+              }
+            }
+          ],
+          "properties": {
+            "confidence": 0.95,
+            "priority": 8
+          }
+        }
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "endTimeUtc": "2025-07-19T15:58:18.432777Z"
+        }
+      ]
+    }
+  ]
+}
