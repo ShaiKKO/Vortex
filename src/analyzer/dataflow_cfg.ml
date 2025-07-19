@@ -55,9 +55,9 @@ module Cfg = struct
     to_node.preds <- from_id :: to_node.preds
   
   let compute_dominators cfg =
-    let rec intersect doms b1 b2 =
-      let rec finger1 = ref b1 in
-      let rec finger2 = ref b2 in
+    let intersect doms b1 b2 =
+      let finger1 = ref b1 in
+      let finger2 = ref b2 in
       while !finger1 <> !finger2 do
         while !finger1 > !finger2 do
           finger1 := doms.(!finger1)
@@ -142,7 +142,7 @@ module Dataflow = struct
           randoms = s1.randoms;
         }
   
-  let analyze_node node state =
+  let rec analyze_node node state =
     match node.Cfg.kind with
     | Statement expr ->
         analyze_expr expr state
