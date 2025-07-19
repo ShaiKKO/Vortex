@@ -98,7 +98,7 @@ and analyze_functors ast import_ctx =
   let findings = ref [] in
   
   let visitor = object(self)
-    inherit [unit] Ast_traverse.iter as super
+    inherit Ast_traverse.iter as super
     
     method! module_expr mexpr () =
       match mexpr.pmod_desc with
@@ -145,7 +145,7 @@ and analyze_first_class_modules ast import_ctx =
   let findings = ref [] in
   
   let visitor = object(self)
-    inherit [unit] Ast_traverse.iter as super
+    inherit Ast_traverse.iter as super
     
     method! expression expr () =
       match expr.pexp_desc with

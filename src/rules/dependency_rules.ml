@@ -14,7 +14,7 @@ let outdated_cryptokit_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -63,7 +63,7 @@ let deprecated_nocrypto_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -113,7 +113,7 @@ let vulnerable_ssl_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -163,7 +163,7 @@ let unpatched_tls_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -215,7 +215,7 @@ let missing_updates_rule : Rule.t = {
     let crypto_libs = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -276,7 +276,7 @@ let insecure_config_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

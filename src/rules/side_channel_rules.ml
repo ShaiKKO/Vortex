@@ -15,7 +15,7 @@ let variable_time_comparison_rule : Rule.t = {
     let sensitive_vars = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -85,7 +85,7 @@ let non_constant_modexp_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -137,7 +137,7 @@ let cache_timing_rule : Rule.t = {
     let sbox_patterns = ["sbox"; "s_box"; "lookup_table"; "substitution"] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -198,7 +198,7 @@ let branch_leak_rule : Rule.t = {
     let secret_vars = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -265,7 +265,7 @@ let power_analysis_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

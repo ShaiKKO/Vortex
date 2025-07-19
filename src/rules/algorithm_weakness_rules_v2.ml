@@ -53,7 +53,7 @@ let weak_hash_rule_v2 : Rule.t = {
     let current_context = ref "" in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -158,7 +158,7 @@ let weak_cipher_rule_v2 : Rule.t = {
     let in_legacy_code = ref false in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         (* Check for legacy markers in comments *)
@@ -247,7 +247,7 @@ let insecure_ecc_curve_rule_v2 : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

@@ -14,7 +14,7 @@ let ecb_mode_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -65,7 +65,7 @@ let cbc_without_mac_rule : Rule.t = {
     let mac_locations = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -131,7 +131,7 @@ let improper_iv_generation_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -204,7 +204,7 @@ let missing_padding_validation_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -258,7 +258,7 @@ let incorrect_random_usage_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -333,7 +333,7 @@ let unverified_certificates_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -400,7 +400,7 @@ let missing_ctr_increment_rule : Rule.t = {
     let ctr_nonces = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

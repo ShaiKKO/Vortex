@@ -22,7 +22,7 @@ let weak_cipher_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -78,7 +78,7 @@ let weak_hash_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -137,7 +137,7 @@ let insecure_ecc_curve_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -191,7 +191,7 @@ let small_block_cipher_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -240,7 +240,7 @@ let weak_key_exchange_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -302,7 +302,7 @@ let legacy_tls_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

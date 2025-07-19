@@ -14,7 +14,7 @@ let timing_attack_rule : Rule.t = {
     let sensitive_vars = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -73,7 +73,7 @@ let weak_kdf_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -123,7 +123,7 @@ let weak_rsa_key_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -182,7 +182,7 @@ let missing_mac_rule : Rule.t = {
     let mac_uses = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -232,7 +232,7 @@ let rsa_timing_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

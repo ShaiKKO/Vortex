@@ -45,7 +45,7 @@ let variable_time_comparison_rule_v2 : Rule.t = {
     ctx.in_test_file <- Context.is_test_file (List.hd ast).pstr_loc.loc_start.pos_fname;
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! structure_item item () =
         match item.pstr_desc with
@@ -154,7 +154,7 @@ let cache_timing_rule_v2 : Rule.t = {
     let table_sizes = Hashtbl.create 16 in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       (* Track array definitions to know their size *)
       method! expression expr () =
@@ -253,7 +253,7 @@ let branch_leak_rule_v2 : Rule.t = {
     ] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

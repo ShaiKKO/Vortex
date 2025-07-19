@@ -40,7 +40,7 @@ let nonce_reuse_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -91,7 +91,7 @@ let weak_random_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -129,7 +129,7 @@ let timing_attack_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ppxlib.Ast_traverse.iter as super
+      inherit Ppxlib.Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with

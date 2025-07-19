@@ -18,7 +18,7 @@ let hardcoded_key_rule : Rule.t = {
     ] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -74,7 +74,7 @@ let predictable_key_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -135,7 +135,7 @@ let aead_nonce_reuse_rule : Rule.t = {
     let nonce_tracking = Hashtbl.create 32 in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -207,7 +207,7 @@ let static_iv_rule : Rule.t = {
     let findings = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -266,7 +266,7 @@ let weak_kdf_iterations_rule : Rule.t = {
     ] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
@@ -326,7 +326,7 @@ let plaintext_key_storage_rule : Rule.t = {
     let key_vars = ref [] in
     
     let visitor = object(self)
-      inherit [unit] Ast_traverse.iter as super
+      inherit Ast_traverse.iter as super
       
       method! expression expr () =
         match expr.pexp_desc with
