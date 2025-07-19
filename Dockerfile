@@ -25,7 +25,7 @@ RUN opam install . --deps-only -y
 RUN eval $(opam env) && dune build --profile release
 
 # Runtime stage
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y \
