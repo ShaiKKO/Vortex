@@ -15,6 +15,12 @@ type security_context = {
   mutable tainted_values: Ident.t list;
 }
 
+type analysis_result = {
+  crypto_calls: crypto_api_call list;
+  tainted_flows: (Ident.t * Location.t list) list;
+  nonce_reuse_count: int;
+}
+
 let create_context () = {
   crypto_calls = [];
   key_flows = [];
