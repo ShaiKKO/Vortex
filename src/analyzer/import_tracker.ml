@@ -1,4 +1,5 @@
 open Ppxlib
+open Utils
 
 type crypto_library = 
   | Cryptokit
@@ -60,32 +61,32 @@ let get_crypto_modules = function
 class import_tracker ctx = object(self)
   inherit Ast_traverse.iter as super
   
-  method! structure_item item () =
+  method! structure_item item =
     match item.pstr_desc with
     | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
         self#track_open txt item.pstr_loc;
-        super#structure_item item ()
+        super#structure_item item
     
     | Pstr_module {pmb_expr = {pmod_desc = Pmod_ident {txt; _}; _}; pmb_name; _} ->
         self#track_module_alias pmb_name.txt txt item.pstr_loc;
-        super#structure_item item ()
+        super#structure_item item
     
-    | _ -> super#structure_item item ()
+    | _ -> super#structure_item item
   
-  method! expression expr () =
+  method! expression expr =
     match expr.pexp_desc with
     | Pexp_ident {txt; _} ->
         self#check_crypto_usage txt expr.pexp_loc;
-        super#expression expr ()
+        super#expression expr
     
     | Pexp_open ({popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _}, e) ->
         self#track_local_open txt expr.pexp_loc;
-        self#expression e ();
+        self#expression e;
     
-    | _ -> super#expression expr ()
+    | _ -> super#expression expr
   
   method private track_open lid loc =
-    let module_path = Longident.flatten lid |> String.concat "." in
+    let module_path = flatten_longident lid |> String.concat "." in
     match library_of_string module_path with
     | Some lib ->
         ctx.imports <- {
@@ -115,7 +116,7 @@ class import_tracker ctx = object(self)
         ) ctx.custom_patterns
   
   method private track_module_alias name lid loc =
-    let module_path = Longident.flatten lid |> String.concat "." in
+    let module_path = flatten_longident lid |> String.concat "." in
     match library_of_string module_path with
     | Some lib ->
         ctx.imports <- {
@@ -135,7 +136,7 @@ class import_tracker ctx = object(self)
     self#track_open lid loc
   
   method private check_crypto_usage lid loc =
-    let path = Longident.flatten lid |> String.concat "." in
+    let path = flatten_longident lid |> String.concat "." in
     
     (* Direct crypto library usage *)
     if library_of_string path <> None then
