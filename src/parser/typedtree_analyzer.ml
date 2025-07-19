@@ -138,7 +138,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
     | _ -> ()
   
   method private report_hardcoded_key loc name =
-    let finding = {
+    let finding : Linter_types.finding = {
       rule_id = "CRYPTO_TYPED_001";
       severity = Linter_types.Critical;
       message = Printf.sprintf "Hardcoded %s detected in typed AST" name;
@@ -157,7 +157,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
     ()
   
   method private report_weak_hash algo loc =
-    let finding = {
+    let finding : Linter_types.finding = {
       rule_id = "CRYPTO_TYPED_002";
       severity = Linter_types.Error;
       message = Printf.sprintf "Weak hash algorithm %s detected" algo;
@@ -175,7 +175,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
     ()
   
   method private report_weak_key_size bits loc =
-    let finding = {
+    let finding : Linter_types.finding = {
       rule_id = "CRYPTO_TYPED_003";
       severity = Linter_types.Error;
       message = Printf.sprintf "Weak key size: %d bits" bits;
@@ -193,7 +193,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
     ()
   
   method private report_nonce_reuse name loc =
-    let finding = {
+    let finding : Linter_types.finding = {
       rule_id = "CRYPTO_TYPED_004";
       severity = Linter_types.Critical;
       message = Printf.sprintf "Nonce '%s' is reused in GCM mode" name;
