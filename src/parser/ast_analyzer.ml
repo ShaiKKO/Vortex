@@ -1,5 +1,7 @@
 open Ppxlib
-open Types
+(* Use our own Types module, not Ppxlib.Types *)
+module Linter_types = Types
+open Linter_types
 
 module Crypto_patterns = struct
   let cryptokit_modules = ["Cipher"; "Hash"; "Random"; "RSA"; "DH"; "Padding"]

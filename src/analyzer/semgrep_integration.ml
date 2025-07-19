@@ -134,7 +134,7 @@ module Semgrep = struct
   let run_semgrep target_path =
     let cmd = Printf.sprintf "semgrep --config=.semgrep-crypto-rules.yml --json %s" target_path in
     let process_in = Lwt_process.open_process_in (Lwt_process.shell cmd) in
-    let* output = Lwt_io.read (Lwt_process.process_in_channel process_in) in
+    let* output = Lwt_io.read process_in#stdout in
     let* status = Lwt_process.close process_in in
     
     try

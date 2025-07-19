@@ -121,7 +121,7 @@ class import_tracker ctx = object(self)
     | Some lib ->
         ctx.imports <- {
           library = lib;
-          modules = [name];
+          modules = [Option.value name ~default:"<unknown>"];
           location = loc;
           is_open = false;
         } :: ctx.imports;

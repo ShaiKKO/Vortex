@@ -165,15 +165,15 @@ module Dataflow = struct
   and analyze_binding state vb =
     match vb.pvb_pat.ppat_desc with
     | Ppat_var {txt = name; _} when contains_substring name "nonce" ->
-        match state with
+        (match state with
         | Value s -> Value {s with nonces = (name, Fresh) :: s.nonces}
-        | _ -> state
+        | _ -> state)
     | _ -> state
   
   and check_nonce_usage args state =
     List.iter (fun (label, arg) ->
       match label, arg with
-      | Asttypes.Labelled "nonce", {pexp_desc = Pexp_ident {txt = Lident name; _}; _} ->
+      | Asttypes.Labelled "nonce", ({pexp_desc = Pexp_ident {txt = Lident name; _}; _} as expr) ->
           (match state with
           | Value s ->
               let nonces' = List.map (fun (n, u) ->

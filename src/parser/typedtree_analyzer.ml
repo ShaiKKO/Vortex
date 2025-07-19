@@ -1,15 +1,12 @@
 open Types
 open Utils
-
-(* Import compiler types *)
-module Compiler_types = Types
 open Typedtree
 
 type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
   args: (Asttypes.arg_label * Typedtree.expression) list;
-  return_type: Compiler_types.type_expr;
+  return_type: type_expr;
 }
 
 type security_context = {

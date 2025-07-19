@@ -196,7 +196,7 @@ module Interprocedural_analyzer = struct
               (* Check if value comes from crypto operation *)
               begin match vb.pvb_expr.pexp_desc with
               | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-                  let func_name = Longident.flatten txt |> String.concat "." in
+                  let func_name = flatten_longident txt |> String.concat "." in
                   if is_crypto_operation ctx func_name then
                     Taint_analysis.taint_variable taint var_name 
                       [Taint_analysis.CryptoOperation func_name]
@@ -215,7 +215,7 @@ module Interprocedural_analyzer = struct
         analyze_expression ctx taint body
         
     | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-        let func_name = Longident.flatten txt |> String.concat "." in
+        let func_name = flatten_longident txt |> String.concat "." in
         
         (* Record call for current function *)
         begin match ctx.current_function with

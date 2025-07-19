@@ -19,6 +19,8 @@ type crypto_vulnerability =
   | InsecurePadding
   | TimingLeak
   | SideChannel
+  | KeyReuse
+  | MacMissing
   | MissingAuthentication
   | WeakKDF
   | InsecureMode of string
