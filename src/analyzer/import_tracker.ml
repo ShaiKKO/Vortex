@@ -154,7 +154,7 @@ end
 let analyze_imports ast =
   let ctx = create_context () in
   let tracker = new import_tracker ctx in
-  tracker#structure ast ();
+  tracker#structure ast;
   ctx
 
 let get_active_rules ctx =

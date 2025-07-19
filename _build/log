@@ -13,449 +13,103 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /Users/shaiiko/.opam/default/bin/ocamlc.opt -config > /var/folders/c_/dzy1cvrx7334qzrvkrdmfb800000gn/T/dune_4ec6fb_output
+$ /Users/shaiiko/.opam/default/bin/ocamlc.opt -config > /var/folders/c_/dzy1cvrx7334qzrvkrdmfb800000gn/T/dune_99338f_output
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -no-alias-deps -opaque -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter.cmo -c -impl src/ocaml_crypto_linter.ml-gen)
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.parallel_stubs.objs/byte -no-alias-deps -opaque -o src/.parallel_stubs.objs/byte/parallel_stubs.cmo -c -impl src/parallel_stubs.ml)
-$ (cd _build/.sandbox/db98ecdc2607d44754056d0ee32247e8/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/common/types.pp.ml --impl src/common/types.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/d06c085f1d621c4cd07933a1a766b520/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/analyzer.pp.ml --impl src/analyzer/analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/299a20ada9385f566d17441da2da531e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/confidence_scoring.pp.ml --impl src/analyzer/confidence_scoring.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/d33ff31f44b2f1b78b8c175b68a2bd11/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/context_manager.pp.ml --impl src/analyzer/context_manager.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/9d2c55ed63e4508752faeae5bfe0ea79/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/interprocedural.pp.ml --impl src/analyzer/interprocedural.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/b269c2b46c2affae88df3f01e7929b76/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/dataflow_cfg.pp.ml --impl src/analyzer/dataflow_cfg.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/8c6b9296cc8976c48a357d3abf1bb973/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/import_tracker.pp.ml --impl src/analyzer/import_tracker.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/68ec2d262cf0cbfba88525d41ef808ad/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/parser/advanced_parser.pp.ml --impl src/parser/advanced_parser.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/a6d1dbaed8688ca745a274279547359f/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/file_analyzer.pp.ml --impl src/analyzer/file_analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/0b3ac312bca5ca9769740df45cc8f90c/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/analyzer_types.pp.ml --impl src/analyzer/analyzer_types.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/33862699c6ce7cb718b07952a8f5e317/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/algorithm_weakness_rules.pp.ml --impl src/rules/algorithm_weakness_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/91b2be232f18d06369a77a2e1481324f/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/parallel_engine.pp.ml --impl src/analyzer/parallel_engine.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/e39d76e1fe6a275f9504aa099c335097/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/semgrep_integration.pp.ml --impl src/analyzer/semgrep_integration.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/f1e81b24732c2219196c8144eb470809/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/common/types.pp.ml --impl src/common/types.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/94c311997fffbd3334af2ecaca0044aa/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/common/utils.pp.ml --impl src/common/utils.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/110aa434b6d525445128253ddabc714d/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/reporter/sarif_reporter.pp.ml --impl src/reporter/sarif_reporter.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/4466b92ecabeb5bbbb2e1d89a606f390/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/parser/typedtree_analyzer.pp.ml --impl src/parser/typedtree_analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/11fd2c506577d115741de477658b1ddf/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/algorithm_weakness_rules_v2.pp.ml --impl src/rules/algorithm_weakness_rules_v2.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/b2850aa4a9154484b92c810e9e2e9f2e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/cve_rules.pp.ml --impl src/rules/cve_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/68ec2d262cf0cbfba88525d41ef808ad/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/parser/advanced_parser.pp.ml --impl src/parser/advanced_parser.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/da1edeaf76b9967024b747e052af4219/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/interprocedural.pp.ml --impl src/analyzer/interprocedural.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/299a20ada9385f566d17441da2da531e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/confidence_scoring.pp.ml --impl src/analyzer/confidence_scoring.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/33862699c6ce7cb718b07952a8f5e317/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/algorithm_weakness_rules.pp.ml --impl src/rules/algorithm_weakness_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/d33ff31f44b2f1b78b8c175b68a2bd11/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/context_manager.pp.ml --impl src/analyzer/context_manager.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/a6d1dbaed8688ca745a274279547359f/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/file_analyzer.pp.ml --impl src/analyzer/file_analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/22b4a756692c05a13311874f7c4a3b8e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/semgrep_integration.pp.ml --impl src/analyzer/semgrep_integration.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/7c585952fc77f4bd91893b2cb8bf7460/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/dataflow_cfg.pp.ml --impl src/analyzer/dataflow_cfg.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/91b2be232f18d06369a77a2e1481324f/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/parallel_engine.pp.ml --impl src/analyzer/parallel_engine.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/a0a14df8a4eebb246ee089326565a5b7/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/import_tracker.pp.ml --impl src/analyzer/import_tracker.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/5d5684f58962c97b6a690c83e0d614a0/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/parser/ast_analyzer.pp.ml --impl src/parser/ast_analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/a58413ac1660c731ce64fa989357b0c8/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/parser/typedtree_analyzer.pp.ml --impl src/parser/typedtree_analyzer.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/b13ec19ae0a417b2aa13d0800db2f59d/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/api_misuse_rules_v2.pp.ml --impl src/rules/api_misuse_rules_v2.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/421ddc2e03f68a519007c5c023b1ee32/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/rule_engine.pp.ml --impl src/rules/rule_engine.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/b2850aa4a9154484b92c810e9e2e9f2e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/cve_rules.pp.ml --impl src/rules/cve_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/2639575be10c61e0b4ea1513a5a3f1f0/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/api_misuse_rules.pp.ml --impl src/rules/api_misuse_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/11fd2c506577d115741de477658b1ddf/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/algorithm_weakness_rules_v2.pp.ml --impl src/rules/algorithm_weakness_rules_v2.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/.sandbox/6ccc73f5b3c559c529b00f14f99c8f00/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/key_nonce_rules.pp.ml --impl src/rules/key_nonce_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/.sandbox/76f0335bdfaff21a0f4cb641a21a79c5/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/side_channel_rules.pp.ml --impl src/rules/side_channel_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -I src/.ocaml_crypto_linter.objs/byte -I src/.ocaml_crypto_linter.objs/native -intf-suffix .ml-gen -no-alias-deps -opaque -o src/.ocaml_crypto_linter.objs/native/ocaml_crypto_linter.cmx -c -impl src/ocaml_crypto_linter.ml-gen)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/parallel_stubs.cma -dllib -lparallel_stubs_stubs -cclib -lparallel_stubs_stubs src/.parallel_stubs.objs/byte/parallel_stubs.cmo)
 $ (cd _build/.sandbox/5a6d8898d39a57fb392817ce930c218e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/dependency_rules.pp.ml --impl src/rules/dependency_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/f039bfc9c34d05a9123d188f7eadfb8e/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/reporter/sarif_reporter.pp.ml --impl src/reporter/sarif_reporter.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/421ddc2e03f68a519007c5c023b1ee32/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/rule_engine.pp.ml --impl src/rules/rule_engine.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/parallel_stubs.cma -dllib -lparallel_stubs_stubs -cclib -lparallel_stubs_stubs src/.parallel_stubs.objs/byte/parallel_stubs.cmo)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -I src/.ocaml_crypto_linter.objs/byte -I src/.ocaml_crypto_linter.objs/native -intf-suffix .ml-gen -no-alias-deps -opaque -o src/.ocaml_crypto_linter.objs/native/ocaml_crypto_linter.cmx -c -impl src/ocaml_crypto_linter.ml-gen)
 $ (cd _build/.sandbox/a619b616ed1c8a931df2f7c3bd826d16/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/side_channel_rules_v2.pp.ml --impl src/rules/side_channel_rules_v2.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/76f0335bdfaff21a0f4cb641a21a79c5/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/rules/side_channel_rules.pp.ml --impl src/rules/side_channel_rules.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -bin-annot-occurrences -I bin/.main.eobjs/byte -no-alias-deps -opaque -o bin/.main.eobjs/byte/dune__exe.cmo -c -impl bin/.main.eobjs/dune__exe.ml-gen)
-$ (cd _build/default/.dune/cc_vendor && /usr/bin/cc -E -P header_check.h) > _build/default/.dune/cc_vendor/cc_vendor
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/context_manager.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Context_manager.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/common/types.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Types.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/interprocedural.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Interprocedural.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/confidence_scoring.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Confidence_scoring.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Analyzer.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl bin/main_simple.ml) > _build/default/bin/.main.eobjs/dune__exe__Main_simple.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/dataflow_cfg.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Dataflow_cfg.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/import_tracker.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Import_tracker.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/parser/advanced_parser.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Advanced_parser.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/file_analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__File_analyzer.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/analyzer_types.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Analyzer_types.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.parallel_stubs.objs/byte -I src/.parallel_stubs.objs/native -intf-suffix .ml -no-alias-deps -opaque -o src/.parallel_stubs.objs/native/parallel_stubs.cmx -c -impl src/parallel_stubs.ml)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/semgrep_integration.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Semgrep_integration.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/parallel_engine.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Parallel_engine.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/algorithm_weakness_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Algorithm_weakness_rules.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/common/utils.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Utils.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/algorithm_weakness_rules_v2.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Algorithm_weakness_rules_v2.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/parser/typedtree_analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Typedtree_analyzer.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/cve_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Cve_rules.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/reporter/sarif_reporter.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Sarif_reporter.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/rule_engine.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Rule_engine.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/api_misuse_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Api_misuse_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Analyzer.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/interprocedural.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Interprocedural.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/analyzer_types.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Analyzer_types.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/parser/advanced_parser.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Advanced_parser.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/common/types.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Types.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/confidence_scoring.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Confidence_scoring.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl bin/main_simple.ml) > _build/default/bin/.main.eobjs/dune__exe__Main_simple.impl.d
+$ (cd _build/default/.dune/cc_vendor && /usr/bin/cc -E -P header_check.h) > _build/default/.dune/cc_vendor/cc_vendor
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/algorithm_weakness_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Algorithm_weakness_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/file_analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__File_analyzer.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/context_manager.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Context_manager.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/semgrep_integration.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Semgrep_integration.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/dataflow_cfg.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Dataflow_cfg.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/parallel_engine.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Parallel_engine.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/import_tracker.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Import_tracker.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/parser/ast_analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Ast_analyzer.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/api_misuse_rules_v2.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Api_misuse_rules_v2.impl.d
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/side_channel_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Side_channel_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/parser/typedtree_analyzer.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Typedtree_analyzer.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.parallel_stubs.objs/byte -I src/.parallel_stubs.objs/native -intf-suffix .ml -no-alias-deps -opaque -o src/.parallel_stubs.objs/native/parallel_stubs.cmx -c -impl src/parallel_stubs.ml)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/api_misuse_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Api_misuse_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/cve_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Cve_rules.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/key_nonce_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Key_nonce_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/algorithm_weakness_rules_v2.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Algorithm_weakness_rules_v2.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/dependency_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Dependency_rules.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/rule_engine.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Rule_engine.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/side_channel_rules.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Side_channel_rules.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/rules/side_channel_rules_v2.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Side_channel_rules_v2.impl.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -intf bin/main_simple.mli) > _build/default/bin/.main.eobjs/dune__exe__Main_simple.intf.d
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Utils.cmo -c -impl src/common/utils.pp.ml)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Types.cmo -c -impl src/common/types.pp.ml)
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -a -o src/parallel_stubs.cmxa -cclib -lparallel_stubs_stubs src/.parallel_stubs.objs/native/parallel_stubs.cmx)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -intf-suffix .ml-gen -no-alias-deps -opaque -o bin/.main.eobjs/native/dune__exe.cmx -c -impl bin/.main.eobjs/dune__exe.ml-gen)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Semgrep_integration.cmo -c -impl src/analyzer/semgrep_integration.pp.ml)
-> File "src/analyzer/semgrep_integration.ml", line 137, characters 31-61:
-> 137 |     let* output = Lwt_io.read (Lwt_process.process_in_channel process_in) in
->                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> Error: Unbound value "Lwt_process.process_in_channel"
-[2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Json_reporter.cmo -c -impl src/reporter/json_reporter.pp.ml)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Confidence_scoring.cmo -c -impl src/analyzer/confidence_scoring.pp.ml)
-> File "src/analyzer/confidence_scoring.ml", line 136, characters 6-14:
-> 136 |     | KeyReuse -> 0.70
->             ^^^^^^^^
-> Error: This variant pattern is expected to have type "crypto_vulnerability"
->        There is no constructor "KeyReuse" within type "crypto_vulnerability"
-[2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Dataflow_cfg.cmo -c -impl src/analyzer/dataflow_cfg.pp.ml)
-> File "src/analyzer/dataflow_cfg.ml", line 171, characters 6-7:
-> 171 |     | _ -> state
->             ^
-> Error (warning 11 [redundant-case]): this match case is unused.
->
-> File "src/analyzer/dataflow_cfg.ml", lines 166-171, characters 4-16:
-> 166 | ....match vb.pvb_pat.ppat_desc with
-> 167 |     | Ppat_var {txt = name; _} when contains_substring name "nonce" ->
-> 168 |         match state with
-> 169 |         | Value s -> Value {s with nonces = (name, Fresh) :: s.nonces}
-> 170 |         | _ -> state
-> 171 |     | _ -> state
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Types.cmo -c -impl src/common/types.pp.ml)
+> File "src/common/types.ml", lines 62-75, characters 30-93:
+> 62 | ..............................function
+> 63 |     | WeakCipher name -> `Assoc [("type", `String "weak_cipher"); ("details", `String name)]
+> 64 |     | InsecureKeySize size -> `Assoc [("type", `String "insecure_key_size"); ("size", `Int size)]
+> 65 |     | HardcodedKey -> `Assoc [("type", `String "hardcoded_key")]
+> 66 |     | PredictableIV -> `Assoc [("type", `String "predictable_iv")]
+> ...
+> 72 |     | SideChannel -> `Assoc [("type", `String "side_channel")]
+> 73 |     | MissingAuthentication -> `Assoc [("type", `String "missing_authentication")]
+> 74 |     | WeakKDF -> `Assoc [("type", `String "weak_kdf")]
+> 75 |     | InsecureMode mode -> `Assoc [("type", `String "insecure_mode"); ("mode", `String mode)]
 > Error (warning 8 [partial-match]): this pattern-matching is not exhaustive.
-> All clauses in this pattern-matching are guarded.
->
-> File "src/analyzer/dataflow_cfg.ml", line 176, characters 36-45:
-> 176 |       | Asttypes.Labelled "nonce", {pexp_desc = Pexp_ident {txt = Lident name; _}; _} ->
->                                           ^^^^^^^^^
-> Error: Unbound record field "pexp_desc"
+> Here is an example of a case that is not matched:
+> (KeyReuse|MacMissing)
 [2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Typedtree_analyzer.cmo -c -impl src/parser/typedtree_analyzer.pp.ml)
-> File "src/parser/typedtree_analyzer.ml", line 12, characters 15-39:
-> 12 |   return_type: Compiler_types.type_expr;
->                     ^^^^^^^^^^^^^^^^^^^^^^^^
-> Error: Unbound type constructor "Compiler_types.type_expr"
-[2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.ocaml_crypto_linter.objs/byte -I src/.ocaml_crypto_linter.objs/native -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -intf-suffix .ml -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/native/ocaml_crypto_linter__Types.cmx -c -impl src/common/types.pp.ml)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -I bin/.main.eobjs/byte -I bin/.main.eobjs/native -intf-suffix .ml-gen -no-alias-deps -opaque -o bin/.main.eobjs/native/dune__exe.cmx -c -impl bin/.main.eobjs/dune__exe.ml-gen)
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.ocaml_crypto_linter.objs/byte -I src/.ocaml_crypto_linter.objs/native -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -intf-suffix .ml -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/native/ocaml_crypto_linter__Utils.cmx -c -impl src/common/utils.pp.ml)
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Ast_analyzer.cmo -c -impl src/parser/ast_analyzer.pp.ml)
-> File "src/parser/ast_analyzer.ml", line 2, characters 5-10:
-> 2 | open Types
->          ^^^^^
-> Error (alert deprecated): module Ppxlib.Types
-> Accessing this module directly is deprecated, use Ocaml_common.Types instead
->
-> File "src/parser/ast_analyzer.ml", line 30, characters 11-18:
-> 30 |   inherit [finding list] Ast_traverse.fold as super
->                 ^^^^^^^
-> Error: Unbound type constructor "finding"
-[2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Sarif_reporter.cmo -c -impl src/reporter/sarif_reporter.pp.ml)
-> File "src/reporter/sarif_reporter.ml", line 239, characters 42-47:
-> 239 |   Yojson.Safe.pretty_to_channel out_chan (sarif :> Yojson.Safe.t);
->                                                 ^^^^^
-> Error: This expression cannot be coerced to type
->          ""Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"";
->        it has type
->          "[> `Assoc of
->               (string *
->                [> `List of
->                     [> `Assoc of
->                          (string *
->                           [> `Assoc of
->                                (string *
->                                 [> `Assoc of
->                                      (string *
->                                       [> `Assoc of
->                                            (string * [> `Int of int ]) list
->                                        | `Float of float
->                                        | `Int of int
->                                        | `List of
->                                            [> `Assoc of
->                                                 (string *
->                                                  [> `Assoc of
->                                                       (string *
->                                                        [> `List of
->                                                             [> `String of
->                                                                  string *
->                                                                  string *
->                                                                  string ]
->                                                             list
->                                                         | `String of string ])
->                                                       list
->                                                   | `Int of int
->                                                   | `String of string ])
->                                                 list ]
->                                            list
->                                        | `String of string ])
->                                      list ])
->                                list
->                            | `List of Yojson.Safe.t list ])
->                          list ]
->                     list
->                 | `String of string ])
->               list ]"
->        but is here used with type
->          "[< Yojson.Safe.t ]" =
->            "[< `Assoc of (string * Yojson.Safe.t) list
->             | `Bool of bool
->             | `Float of float
->             | `Int of int
->             | `Intlit of string
->             | `List of Yojson.Safe.t list
->             | `Null
->             | `String of string ]"
->        Type
->          "[> `List of
->               [> `Assoc of
->                    (string *
->                     [> `Assoc of
->                          (string *
->                           [> `Assoc of
->                                (string *
->                                 [> `Assoc of (string * [> `Int of int ]) list
->                                  | `Float of float
->                                  | `Int of int
->                                  | `List of
->                                      [> `Assoc of
->                                           (string *
->                                            [> `Assoc of
->                                                 (string *
->                                                  [> `List of
->                                                       [> `String of
->                                                            string * string *
->                                                            string ]
->                                                       list
->                                                   | `String of string ])
->                                                 list
->                                             | `Int of int
->                                             | `String of string ])
->                                           list ]
->                                      list
->                                  | `String of string ])
->                                list ])
->                          list
->                      | `List of Yojson.Safe.t list ])
->                    list ]
->               list
->           | `String of string ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of
->               (string *
->                [> `Assoc of
->                     (string *
->                      [> `Assoc of
->                           (string *
->                            [> `Assoc of (string * [> `Int of int ]) list
->                             | `Float of float
->                             | `Int of int
->                             | `List of
->                                 [> `Assoc of
->                                      (string *
->                                       [> `Assoc of
->                                            (string *
->                                             [> `List of
->                                                  [> `String of
->                                                       string * string *
->                                                       string ]
->                                                  list
->                                              | `String of string ])
->                                            list
->                                        | `Int of int
->                                        | `String of string ])
->                                      list ]
->                                 list
->                             | `String of string ])
->                           list ])
->                     list
->                 | `List of Yojson.Safe.t list ])
->               list ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of
->               (string *
->                [> `Assoc of
->                     (string *
->                      [> `Assoc of (string * [> `Int of int ]) list
->                       | `Float of float
->                       | `Int of int
->                       | `List of
->                           [> `Assoc of
->                                (string *
->                                 [> `Assoc of
->                                      (string *
->                                       [> `List of
->                                            [> `String of
->                                                 string * string * string ]
->                                            list
->                                        | `String of string ])
->                                      list
->                                  | `Int of int
->                                  | `String of string ])
->                                list ]
->                           list
->                       | `String of string ])
->                     list ])
->               list
->           | `List of Yojson.Safe.t list ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of
->               (string *
->                [> `Assoc of (string * [> `Int of int ]) list
->                 | `Float of float
->                 | `Int of int
->                 | `List of
->                     [> `Assoc of
->                          (string *
->                           [> `Assoc of
->                                (string *
->                                 [> `List of
->                                      [> `String of string * string * string ]
->                                      list
->                                  | `String of string ])
->                                list
->                            | `Int of int
->                            | `String of string ])
->                          list ]
->                     list
->                 | `String of string ])
->               list ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of (string * [> `Int of int ]) list
->           | `Float of float
->           | `Int of int
->           | `List of
->               [> `Assoc of
->                    (string *
->                     [> `Assoc of
->                          (string *
->                           [> `List of
->                                [> `String of string * string * string ] list
->                            | `String of string ])
->                          list
->                      | `Int of int
->                      | `String of string ])
->                    list ]
->               list
->           | `String of string ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of
->               (string *
->                [> `Assoc of
->                     (string *
->                      [> `List of
->                           [> `String of string * string * string ] list
->                       | `String of string ])
->                     list
->                 | `Int of int
->                 | `String of string ])
->               list ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `Assoc of
->               (string *
->                [> `List of [> `String of string * string * string ] list
->                 | `String of string ])
->               list
->           | `Int of int
->           | `String of string ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type
->          "[> `List of [> `String of string * string * string ] list
->           | `String of string ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Type "[> `String of string * string * string ]"
->        is not compatible with type
->          "Yojson.Safe.t" =
->            "[ `Assoc of (string * Yojson.Safe.t) list
->            | `Bool of bool
->            | `Float of float
->            | `Int of int
->            | `Intlit of string
->            | `List of Yojson.Safe.t list
->            | `Null
->            | `String of string ]"
->        Types for tag "`String" are incompatible.
-> This simple coercion was not fully general.
-> Hint: Consider using a fully explicit coercion
-> of the form: "(foo : ty1 :> ty2)"
-[2]
-$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Interprocedural.cmo -c -impl src/analyzer/interprocedural.pp.ml)
-> File "src/analyzer/interprocedural.ml", line 199, characters 34-51:
-> 199 |                   let func_name = Longident.flatten txt |> String.concat "." in
->                                         ^^^^^^^^^^^^^^^^^
-> Error: Unbound value "Longident.flatten"
-[2]
 $ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Import_tracker.cmo -c -impl src/analyzer/import_tracker.pp.ml)
-> File "src/analyzer/import_tracker.ml", line 124, characters 21-25:
-> 124 |           modules = [name];
->                            ^^^^
-> Error: The value "name" has type "string option"
->        but an expression was expected of type "string"
+> File "src/analyzer/import_tracker.ml", line 157, characters 2-26:
+> 157 |   tracker#structure ast ();
+>         ^^^^^^^^^^^^^^^^^^^^^^^^
+> Error: The function "tracker#structure" has type
+>          Ppxlib__.Import.Ast.structure -> unit
+>        It is applied to too many arguments
+> File "src/analyzer/import_tracker.ml", line 157, characters 22-24:
+> 157 |   tracker#structure ast ();
+>                             ^^
+>   Hint: Did you forget a ';'?
+> File "src/analyzer/import_tracker.ml", line 157, characters 24-26:
+> 157 |   tracker#structure ast ();
+>                               ^^
+>   This extra argument is not expected.
 [2]
+$ (cd _build/default/src && /usr/bin/cc -O2 -fno-strict-aliasing -fwrapv -pthread -D_FILE_OFFSET_BITS=64 -Wall -fdiagnostics-color=always -g -I /Users/shaiiko/.opam/default/lib/ocaml -o parallel_stubs.o -c parallel_stubs.c)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlmklib -g -o src/parallel_stubs_stubs src/parallel_stubs.o)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlopt.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -shared -linkall -I src -o src/parallel_stubs.cmxs src/parallel_stubs.cmxa)

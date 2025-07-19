@@ -70,6 +70,8 @@ module Json_conv = struct
     | InsecurePadding -> `Assoc [("type", `String "insecure_padding")]
     | TimingLeak -> `Assoc [("type", `String "timing_leak")]
     | SideChannel -> `Assoc [("type", `String "side_channel")]
+    | KeyReuse -> `Assoc [("type", `String "key_reuse")]
+    | MacMissing -> `Assoc [("type", `String "mac_missing")]
     | MissingAuthentication -> `Assoc [("type", `String "missing_authentication")]
     | WeakKDF -> `Assoc [("type", `String "weak_kdf")]
     | InsecureMode mode -> `Assoc [("type", `String "insecure_mode"); ("mode", `String mode)]
