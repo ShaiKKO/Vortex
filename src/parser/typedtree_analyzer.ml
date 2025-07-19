@@ -101,9 +101,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
     | _ -> ()
   
   method private check_aes_key_size args loc =
-    List.iter (fun (label, arg) ->
-      match label with
-      | Asttypes.Labelled "key" ->
+    List.iter (fun (label, arg_opt) ->
+      match label, arg_opt with
+      | Asttypes.Labelled "key", Some arg ->
           (match arg.exp_desc with
           | Texp_constant (Const_string (key, _, _)) ->
               let key_bits = String.length key * 8 in
@@ -114,9 +114,9 @@ class typedtree_visitor (ctx: security_context) = object(self)
     ) args
   
   method private check_gcm_nonce args loc =
-    List.iter (fun (label, arg) ->
-      match label with
-      | Asttypes.Labelled "nonce" ->
+    List.iter (fun (label, arg_opt) ->
+      match label, arg_opt with
+      | Asttypes.Labelled "nonce", Some arg ->
           (match arg.exp_desc with
           | Texp_ident (Path.Pident id, _, _) ->
               let count = 
