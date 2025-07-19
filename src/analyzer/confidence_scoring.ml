@@ -209,7 +209,7 @@ module Enhanced_finding = struct
     in
     
     `Assoc [
-      ("finding", finding_to_json enhanced.finding);
+      ("finding", Types.Json_conv.finding_to_json enhanced.finding);
       ("confidence", `String conf_str);
       ("confidence_score", `Float conf_score);
       ("risk_score", `Float enhanced.risk_score);
@@ -258,7 +258,7 @@ module ML_feedback = struct
       ("is_test", if ctx.Context_analyzer.is_test_file then 1.0 else 0.0);
       ("is_crypto_module", if ctx.is_crypto_module then 1.0 else 0.0);
       ("module_depth", float_of_int ctx.module_depth);
-      ("severity", Rule_confidence.severity_weight finding.severity);
+      ("severity", Enhanced_finding.severity_weight finding.severity);
     ]
 
   let record_feedback finding was_correct =

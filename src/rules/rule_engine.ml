@@ -1,5 +1,6 @@
 open Types
 open Utils
+open Ppxlib
 
 module Rule = struct
   type t = {
@@ -42,7 +43,7 @@ let nonce_reuse_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, body) ->
             List.iter (fun vb ->
@@ -53,7 +54,7 @@ let nonce_reuse_rule : Rule.t = {
                   Hashtbl.add nonce_vars name vb.pvb_expr.pexp_loc
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_ident {txt = Lident name; _} when Hashtbl.mem nonce_vars name ->
             let uses = try Hashtbl.find_all nonce_vars name with Not_found -> [] in
@@ -74,10 +75,10 @@ let nonce_reuse_rule : Rule.t = {
                 references = ["https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf"];
               } :: !findings
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -93,7 +94,7 @@ let weak_random_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_ident {txt = Ldot (Lident "Random", _); _} ->
             findings := {
@@ -112,10 +113,10 @@ let weak_random_rule : Rule.t = {
               references = ["https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html#secure-random-number-generation"];
             } :: !findings
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -131,7 +132,7 @@ let timing_attack_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Lident ("=" | "<>" | "String.equal"); _}; _}, args) ->
             let is_crypto_context = true in (* TODO: improve context detection *)
@@ -152,10 +153,10 @@ let timing_attack_rule : Rule.t = {
                 references = ["https://codahale.com/a-lesson-in-timing-attacks/"];
               } :: !findings
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

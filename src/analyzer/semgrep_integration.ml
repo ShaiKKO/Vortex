@@ -1,4 +1,5 @@
 open Types
+open Utils
 open Lwt.Syntax
 
 module Semgrep = struct
@@ -135,7 +136,7 @@ module Semgrep = struct
     let cmd = Printf.sprintf "semgrep --config=.semgrep-crypto-rules.yml --json %s" target_path in
     let process_in = Lwt_process.open_process_in (Lwt_process.shell cmd) in
     let* output = Lwt_io.read process_in#stdout in
-    let* status = Lwt_process.close process_in in
+    let* status = process_in#close in
     
     try
       let json = Yojson.Safe.from_string output in
@@ -149,9 +150,9 @@ module Semgrep = struct
         let end_ = result |> member "end" in
         
         let vulnerability = 
-          if String.contains check_id "hardcoded-key" then HardcodedKey
-          else if String.contains check_id "weak-hash" then WeakHash "detected"
-          else if String.contains check_id "ecb-mode" then InsecureMode "ECB"
+          if contains_substring check_id "hardcoded-key" then HardcodedKey
+          else if contains_substring check_id "weak-hash" then WeakHash "detected"
+          else if contains_substring check_id "ecb-mode" then InsecureMode "ECB"
           else WeakCipher "unknown"
         in
         

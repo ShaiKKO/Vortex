@@ -1,5 +1,6 @@
 open Types
 open Utils
+open Ppxlib
 
 module Cfg = struct
   type node_id = int
@@ -171,19 +172,18 @@ module Dataflow = struct
     | _ -> state
   
   and check_nonce_usage args state =
-    List.iter (fun (label, arg) ->
+    List.fold_left (fun acc_state (label, arg) ->
       match label, arg with
-      | Asttypes.Labelled "nonce", ({pexp_desc = Pexp_ident {txt = Lident name; _}; _} as expr) ->
-          (match state with
+      | Asttypes.Labelled "nonce", {pexp_desc = Pexp_ident {txt = Lident name; _}; _} ->
+          (match acc_state with
           | Value s ->
               let nonces' = List.map (fun (n, u) ->
                 if n = name then (n, Used) else (n, u)
               ) s.nonces in
               Value {s with nonces = nonces'}
-          | _ -> state)
-      | _ -> ()
-    ) args;
-    state
+          | _ -> acc_state)
+      | _ -> acc_state
+    ) state args
   
   let worklist_algorithm cfg initial_state =
     let states = Hashtbl.create (Hashtbl.length cfg.Cfg.nodes) in

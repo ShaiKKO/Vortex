@@ -24,6 +24,8 @@ module Sarif = struct
     | InsecurePadding -> ["security", "cryptography", "CWE-310"]
     | TimingLeak -> ["security", "cryptography", "CWE-208"]
     | SideChannel -> ["security", "cryptography", "CWE-203"]
+    | KeyReuse -> ["security", "cryptography", "CWE-323"]
+    | MacMissing -> ["security", "cryptography", "CWE-353"]
     | MissingAuthentication -> ["security", "cryptography", "CWE-353"]
     | WeakKDF -> ["security", "cryptography", "CWE-916"]
     | InsecureMode _ -> ["security", "cryptography", "CWE-327"]
@@ -98,6 +100,8 @@ module Sarif = struct
           | InsecurePadding -> "insecure-padding"
           | TimingLeak -> "timing-leak"
           | SideChannel -> "side-channel"
+          | KeyReuse -> "key-reuse"
+          | MacMissing -> "mac-missing"
           | MissingAuthentication -> "missing-auth"
           | WeakKDF -> "weak-kdf"
           | InsecureMode mode -> "insecure-mode:" ^ mode))
@@ -236,9 +240,9 @@ end
 let write_sarif_report ~output_file result =
   let sarif = Sarif.create_sarif_report result in
   let out_chan = open_out output_file in
-  Yojson.Safe.pretty_to_channel out_chan sarif;
+  Yojson.Safe.pretty_to_channel out_chan (sarif :> Yojson.Safe.t);
   close_out out_chan
 
 let print_sarif result =
   let sarif = Sarif.create_sarif_report result in
-  Yojson.Safe.pretty_to_channel stdout sarif
+  Yojson.Safe.pretty_to_channel stdout (sarif :> Yojson.Safe.t)

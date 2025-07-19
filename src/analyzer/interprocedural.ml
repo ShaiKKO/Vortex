@@ -259,17 +259,9 @@ module Interprocedural_analyzer = struct
               let summary = Function_summary.create func_name in
               
               (* Extract parameters if it's a function *)
-              let params = match vb.pvb_expr.pexp_desc with
-              | Pexp_fun (_, _, pat, _) ->
-                  let rec extract_params pat acc =
-                    match pat.ppat_desc with
-                    | Ppat_var {txt = name; _} ->
-                        { Function_summary.name; position = List.length acc; 
-                          is_output = false; is_sensitive = false } :: acc
-                    | _ -> acc
-                  in
-                  extract_params pat []
-              | _ -> []
+              let params = 
+                (* For now, we don't extract parameters from complex function patterns *)
+                []
               in
               
               let summary = { summary with parameters = params } in

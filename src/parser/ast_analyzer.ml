@@ -29,7 +29,7 @@ module Crypto_patterns = struct
 end
 
 class crypto_visitor = object(self)
-  inherit [finding list] Ast_traverse.fold as super
+  inherit [Linter_types.finding list] Ast_traverse.fold as super
   
   method! expression expr findings =
     let open Ast_helper in

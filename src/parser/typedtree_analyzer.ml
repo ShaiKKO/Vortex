@@ -6,7 +6,7 @@ type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
   args: (Asttypes.arg_label * Typedtree.expression) list;
-  return_type: type_expr;
+  return_type: Typedtree.type_expr;
 }
 
 type security_context = {
