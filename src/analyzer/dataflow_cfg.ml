@@ -274,11 +274,11 @@ let build_cfg_from_ast ast =
   } in
   Hashtbl.add cfg.nodes cfg.exit exit_node;
   
-  List.fold_left (fun parent_id item ->
+  let _ = List.fold_left (fun parent_id item ->
     match item.Parsetree.pstr_desc with
     | Pstr_eval (expr, _) -> visit_expr parent_id expr
     | _ -> parent_id
-  ) cfg.entry ast;
+  ) cfg.entry ast in
   
   Cfg.compute_dominators cfg;
   cfg

@@ -30,7 +30,7 @@ module Sarif = struct
     | WeakKDF -> ["security", "cryptography", "CWE-916"]
     | InsecureMode _ -> ["security", "cryptography", "CWE-327"]
   
-  let create_rule finding =
+  let create_rule finding : Yojson.Safe.t =
     `Assoc [
       ("id", `String finding.rule_id);
       ("name", `String finding.rule_id);
@@ -163,7 +163,7 @@ module Sarif = struct
               ("name", `String "ocaml-crypto-linter");
               ("version", `String "0.1.0");
               ("informationUri", `String "https://github.com/your-username/ocaml-crypto-linter");
-              ("rules", `List (rules : Yojson.Safe.t list));
+              ("rules", `List rules);
               ("supportedTaxonomies", `List [
                 `Assoc [
                   ("name", `String "CWE");

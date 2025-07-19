@@ -6,7 +6,6 @@ type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
   args: (Asttypes.arg_label * Typedtree.expression) list;
-  return_type: Types.type_expr; (* Use compiler-libs Types module *)
 }
 
 type security_context = {
@@ -29,7 +28,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method! expr expr =
     match expr.exp_desc with
     | Texp_apply (func, args) ->
-        self#analyze_application func args expr.exp_loc expr.exp_type;
+        self#analyze_application func args expr.exp_loc;
         super#expr expr
     
     | Texp_let (_, bindings, body) ->
@@ -42,7 +41,7 @@ class typedtree_visitor (ctx: security_context) = object(self)
     
     | _ -> super#expr expr
   
-  method private analyze_application func args loc ret_type =
+  method private analyze_application func args loc =
     match func.exp_desc with
     | Texp_ident (path, _, _) ->
         let path_str = Path.name path in
@@ -51,7 +50,6 @@ class typedtree_visitor (ctx: security_context) = object(self)
             func_path = path;
             location = loc;
             args = args;
-            return_type = ret_type;
           } :: ctx.crypto_calls;
           
           self#check_crypto_parameters path_str args loc
