@@ -52,7 +52,7 @@ jobs:
         opam exec -- dune exec bin/main.exe -- test/examples/*.ml -f json -o lint-report.json
     
     - name: Upload lint report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: crypto-lint-report-${{ matrix.os }}-${{ matrix.ocaml-compiler }}
@@ -129,7 +129,7 @@ jobs:
         opam exec -- bisect-ppx-report summary
     
     - name: Upload coverage
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: _coverage/
