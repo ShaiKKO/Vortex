@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for OCaml Crypto Linter
 
 # Build stage
-FROM ocaml/opam:ubuntu-22.04-ocaml-5.2 AS builder
+FROM ocaml/opam:ubuntu-22.04-ocaml-5.5 AS builder
 
 # Install system dependencies
 USER root
