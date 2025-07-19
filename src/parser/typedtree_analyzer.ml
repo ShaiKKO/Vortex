@@ -1,10 +1,15 @@
 open Types
+open Utils
+
+(* Import compiler types *)
+module Compiler_types = Types
+open Typedtree
 
 type crypto_api_call = {
   func_path: Path.t;
   location: Location.t;
   args: (Asttypes.arg_label * Typedtree.expression) list;
-  return_type: Types.type_expr;
+  return_type: Compiler_types.type_expr;
 }
 
 type security_context = {
@@ -78,13 +83,13 @@ class typedtree_visitor (ctx: security_context) = object(self)
   method private is_sensitive_name name =
     let lower = String.lowercase_ascii name in
     List.exists (fun keyword ->
-      String.contains_substring lower keyword
+      contains_substring lower keyword
     ) ["key"; "password"; "secret"; "token"; "nonce"; "iv"; "salt"]
   
   method private is_key_like name =
     let lower = String.lowercase_ascii name in
-    String.contains_substring lower "key" || 
-    String.contains_substring lower "password"
+    contains_substring lower "key" || 
+    contains_substring lower "password"
   
   method private check_crypto_parameters func_name args loc =
     match func_name with
@@ -94,8 +99,8 @@ class typedtree_visitor (ctx: security_context) = object(self)
     | "Nocrypto.Cipher_block.AES.GCM.encrypt" ->
         self#check_gcm_nonce args loc
     
-    | path when String.contains_substring path "Hash.md5" ||
-                String.contains_substring path "Hash.sha1" ->
+    | path when contains_substring path "Hash.md5" ||
+                contains_substring path "Hash.sha1" ->
         self#report_weak_hash path loc
     
     | _ -> ()

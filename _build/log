@@ -1,4 +1,4 @@
-# dune build src/common/types.cmo
+# dune build bin/main_simple.exe
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /Users/shaiiko/.cache/dune/db
@@ -13,3 +13,375 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
+$ /Users/shaiiko/.opam/default/bin/ocamlc.opt -config > /var/folders/c_/dzy1cvrx7334qzrvkrdmfb800000gn/T/dune_67eca3_output
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl bin/main_simple.ml) > _build/default/bin/.main.eobjs/dune__exe__Main_simple.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -intf bin/main_simple.mli) > _build/default/bin/.main.eobjs/dune__exe__Main_simple.intf.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -49 -nopervasives -nostdlib -g -bin-annot -bin-annot-occurrences -I bin/.main.eobjs/byte -no-alias-deps -opaque -o bin/.main.eobjs/byte/dune__exe.cmo -c -impl bin/.main.eobjs/dune__exe.ml-gen)
+$ (cd _build/.sandbox/db98ecdc2607d44754056d0ee32247e8/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/common/types.pp.ml --impl src/common/types.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/ccee3e4541acc7c86e989c3c8ecab88a/default && .ppx/0224ad3443a846e54f1637fccb074e7d/ppx.exe --cookie 'library-name="ocaml_crypto_linter"' -o src/analyzer/import_tracker.pp.ml --impl src/analyzer/import_tracker.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/common/types.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Types.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamldep.opt -modules -impl src/analyzer/import_tracker.pp.ml) > _build/default/src/.ocaml_crypto_linter.objs/ocaml_crypto_linter__Import_tracker.impl.d
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Types.cmo -c -impl src/common/types.pp.ml)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Typedtree_analyzer.cmo -c -impl src/parser/typedtree_analyzer.pp.ml)
+> File "src/parser/typedtree_analyzer.ml", line 7, characters 15-30:
+> 7 |   return_type: Types.type_expr;
+>                    ^^^^^^^^^^^^^^^
+> Error: Unbound type constructor "Types.type_expr"
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Confidence_scoring.cmo -c -impl src/analyzer/confidence_scoring.pp.ml)
+> File "src/analyzer/confidence_scoring.ml", line 56, characters 6-31:
+> 56 |       String.contains_substring filename "_test.ml" ||
+>            ^^^^^^^^^^^^^^^^^^^^^^^^^
+> Error: Unbound value "String.contains_substring"
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Dataflow_cfg.cmo -c -impl src/analyzer/dataflow_cfg.pp.ml)
+> File "src/analyzer/dataflow_cfg.ml", line 58, characters 14-21:
+> 58 |       let rec finger1 = ref b1 in
+>                    ^^^^^^^
+> Error (warning 39 [unused-rec-flag]): unused rec flag.
+>
+> File "src/analyzer/dataflow_cfg.ml", line 59, characters 14-21:
+> 59 |       let rec finger2 = ref b2 in
+>                    ^^^^^^^
+> Error (warning 39 [unused-rec-flag]): unused rec flag.
+>
+> File "src/analyzer/dataflow_cfg.ml", line 57, characters 12-21:
+> 57 |     let rec intersect doms b1 b2 =
+>                  ^^^^^^^^^
+> Error (warning 39 [unused-rec-flag]): unused rec flag.
+>
+> File "src/analyzer/dataflow_cfg.ml", line 147, characters 8-20:
+> 147 |         analyze_expr expr state
+>               ^^^^^^^^^^^^
+> Error: Unbound value "analyze_expr"
+> Hint: If this is a recursive definition,
+> you should add the "rec" keyword on line 144
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Json_reporter.cmo -c -impl src/reporter/json_reporter.pp.ml)
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Semgrep_integration.cmo -c -impl src/analyzer/semgrep_integration.pp.ml)
+> File "src/analyzer/semgrep_integration.ml", line 136, characters 27-78:
+> 136 |     let* (stdin, stdout) = Lwt_process.open_process_in (Lwt_process.shell cmd) in
+>                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> Error: This expression has type "Lwt_process.process_in"
+>        but an expression was expected of type "'a Lwt.t"
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Ast_analyzer.cmo -c -impl src/parser/ast_analyzer.pp.ml)
+> File "src/parser/ast_analyzer.ml", line 2, characters 5-10:
+> 2 | open Types
+>          ^^^^^
+> Error (alert deprecated): module Ppxlib.Types
+> Accessing this module directly is deprecated, use Ocaml_common.Types instead
+>
+> File "src/parser/ast_analyzer.ml", line 30, characters 11-18:
+> 30 |   inherit [finding list] Ast_traverse.fold as super
+>                 ^^^^^^^
+> Error: Unbound type constructor "finding"
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Rule_engine.cmo -c -impl src/rules/rule_engine.pp.ml)
+> File "src/rules/rule_engine.ml", line 42, characters 14-45:
+> 42 |       inherit [unit] Ppxlib.Ast_traverse.iter as super
+>                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> Error: The class constructor "Ppxlib.Ast_traverse.iter"
+>        expects 0 type argument(s), but is here applied to 1 type argument(s)
+[2]
+$ (cd _build/default && /Users/shaiiko/.opam/default/bin/ocamlc.opt -w @1..3@5..28@31..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -bin-annot-occurrences -I src/.ocaml_crypto_linter.objs/byte -I /Users/shaiiko/.opam/default/lib/bigarray-compat -I /Users/shaiiko/.opam/default/lib/bytes -I /Users/shaiiko/.opam/default/lib/cmdliner -I /Users/shaiiko/.opam/default/lib/cryptokit -I /Users/shaiiko/.opam/default/lib/cstruct -I /Users/shaiiko/.opam/default/lib/lwt -I /Users/shaiiko/.opam/default/lib/lwt/unix -I /Users/shaiiko/.opam/default/lib/nocrypto -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/common -I /Users/shaiiko/.opam/default/lib/ocaml-compiler-libs/shadow -I /Users/shaiiko/.opam/default/lib/ocaml/compiler-libs -I /Users/shaiiko/.opam/default/lib/ocaml/threads -I /Users/shaiiko/.opam/default/lib/ocaml/unix -I /Users/shaiiko/.opam/default/lib/ocplib-endian -I /Users/shaiiko/.opam/default/lib/ocplib-endian/bigstring -I /Users/shaiiko/.opam/default/lib/parsexp -I /Users/shaiiko/.opam/default/lib/ppx_derivers -I /Users/shaiiko/.opam/default/lib/ppx_deriving/runtime -I /Users/shaiiko/.opam/default/lib/ppx_sexp_conv/runtime-lib -I /Users/shaiiko/.opam/default/lib/ppxlib -I /Users/shaiiko/.opam/default/lib/ppxlib/ast -I /Users/shaiiko/.opam/default/lib/ppxlib/astlib -I /Users/shaiiko/.opam/default/lib/ppxlib/print_diff -I /Users/shaiiko/.opam/default/lib/ppxlib/stdppx -I /Users/shaiiko/.opam/default/lib/ppxlib/traverse_builtins -I /Users/shaiiko/.opam/default/lib/sexplib -I /Users/shaiiko/.opam/default/lib/sexplib0 -I /Users/shaiiko/.opam/default/lib/stdlib-shims -I /Users/shaiiko/.opam/default/lib/yojson -I /Users/shaiiko/.opam/default/lib/zarith -no-alias-deps -opaque -open Ocaml_crypto_linter -o src/.ocaml_crypto_linter.objs/byte/ocaml_crypto_linter__Sarif_reporter.cmo -c -impl src/reporter/sarif_reporter.pp.ml)
+> File "src/reporter/sarif_reporter.ml", line 239, characters 41-46:
+> 239 |   Yojson.Safe.pretty_to_channel out_chan sarif;
+>                                                ^^^^^
+> Error: The value "sarif" has type
+>          "[> `Assoc of
+>               (string *
+>                [> `List of
+>                     [> `Assoc of
+>                          (string *
+>                           [> `Assoc of
+>                                (string *
+>                                 [> `Assoc of
+>                                      (string *
+>                                       [> `Assoc of
+>                                            (string * [> `Int of int ]) list
+>                                        | `Float of float
+>                                        | `Int of int
+>                                        | `List of
+>                                            [> `Assoc of
+>                                                 (string *
+>                                                  [> `Assoc of
+>                                                       (string *
+>                                                        [> `List of
+>                                                             [> `String of
+>                                                                  string *
+>                                                                  string *
+>                                                                  string ]
+>                                                             list
+>                                                         | `String of string ])
+>                                                       list
+>                                                   | `Int of int
+>                                                   | `String of string ])
+>                                                 list ]
+>                                            list
+>                                        | `String of string ])
+>                                      list ])
+>                                list
+>                            | `List of Yojson.Safe.t list ])
+>                          list ]
+>                     list
+>                 | `String of string ])
+>               list ]"
+>        but an expression was expected of type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `List of
+>               [> `Assoc of
+>                    (string *
+>                     [> `Assoc of
+>                          (string *
+>                           [> `Assoc of
+>                                (string *
+>                                 [> `Assoc of (string * [> `Int of int ]) list
+>                                  | `Float of float
+>                                  | `Int of int
+>                                  | `List of
+>                                      [> `Assoc of
+>                                           (string *
+>                                            [> `Assoc of
+>                                                 (string *
+>                                                  [> `List of
+>                                                       [> `String of
+>                                                            string * string *
+>                                                            string ]
+>                                                       list
+>                                                   | `String of string ])
+>                                                 list
+>                                             | `Int of int
+>                                             | `String of string ])
+>                                           list ]
+>                                      list
+>                                  | `String of string ])
+>                                list ])
+>                          list
+>                      | `List of Yojson.Safe.t list ])
+>                    list ]
+>               list
+>           | `String of string ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of
+>               (string *
+>                [> `Assoc of
+>                     (string *
+>                      [> `Assoc of
+>                           (string *
+>                            [> `Assoc of (string * [> `Int of int ]) list
+>                             | `Float of float
+>                             | `Int of int
+>                             | `List of
+>                                 [> `Assoc of
+>                                      (string *
+>                                       [> `Assoc of
+>                                            (string *
+>                                             [> `List of
+>                                                  [> `String of
+>                                                       string * string *
+>                                                       string ]
+>                                                  list
+>                                              | `String of string ])
+>                                            list
+>                                        | `Int of int
+>                                        | `String of string ])
+>                                      list ]
+>                                 list
+>                             | `String of string ])
+>                           list ])
+>                     list
+>                 | `List of Yojson.Safe.t list ])
+>               list ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of
+>               (string *
+>                [> `Assoc of
+>                     (string *
+>                      [> `Assoc of (string * [> `Int of int ]) list
+>                       | `Float of float
+>                       | `Int of int
+>                       | `List of
+>                           [> `Assoc of
+>                                (string *
+>                                 [> `Assoc of
+>                                      (string *
+>                                       [> `List of
+>                                            [> `String of
+>                                                 string * string * string ]
+>                                            list
+>                                        | `String of string ])
+>                                      list
+>                                  | `Int of int
+>                                  | `String of string ])
+>                                list ]
+>                           list
+>                       | `String of string ])
+>                     list ])
+>               list
+>           | `List of Yojson.Safe.t list ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of
+>               (string *
+>                [> `Assoc of (string * [> `Int of int ]) list
+>                 | `Float of float
+>                 | `Int of int
+>                 | `List of
+>                     [> `Assoc of
+>                          (string *
+>                           [> `Assoc of
+>                                (string *
+>                                 [> `List of
+>                                      [> `String of string * string * string ]
+>                                      list
+>                                  | `String of string ])
+>                                list
+>                            | `Int of int
+>                            | `String of string ])
+>                          list ]
+>                     list
+>                 | `String of string ])
+>               list ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of (string * [> `Int of int ]) list
+>           | `Float of float
+>           | `Int of int
+>           | `List of
+>               [> `Assoc of
+>                    (string *
+>                     [> `Assoc of
+>                          (string *
+>                           [> `List of
+>                                [> `String of string * string * string ] list
+>                            | `String of string ])
+>                          list
+>                      | `Int of int
+>                      | `String of string ])
+>                    list ]
+>               list
+>           | `String of string ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of
+>               (string *
+>                [> `Assoc of
+>                     (string *
+>                      [> `List of
+>                           [> `String of string * string * string ] list
+>                       | `String of string ])
+>                     list
+>                 | `Int of int
+>                 | `String of string ])
+>               list ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `Assoc of
+>               (string *
+>                [> `List of [> `String of string * string * string ] list
+>                 | `String of string ])
+>               list
+>           | `Int of int
+>           | `String of string ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type
+>          "[> `List of [> `String of string * string * string ] list
+>           | `String of string ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Type "[> `String of string * string * string ]"
+>        is not compatible with type
+>          "Yojson.Safe.t" =
+>            "[ `Assoc of (string * Yojson.Safe.t) list
+>            | `Bool of bool
+>            | `Float of float
+>            | `Int of int
+>            | `Intlit of string
+>            | `List of Yojson.Safe.t list
+>            | `Null
+>            | `String of string ]"
+>        Types for tag "`String" are incompatible
+[2]

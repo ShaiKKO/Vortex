@@ -41,7 +41,6 @@ type analysis_result = {
 }
 
 module Json_conv = struct
-  open Yojson.Safe.Util
   
   let severity_to_json = function
     | Info -> `String "info"

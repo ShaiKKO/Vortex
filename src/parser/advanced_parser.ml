@@ -1,4 +1,5 @@
 open Types
+open Utils
 
 module Path = Path
 module Ident = Ident
@@ -51,10 +52,10 @@ module Advanced_parser = struct
         match vb.vb_pat.pat_desc with
         | Tpat_var (id, _) ->
             let name = Ident.name id in
-            if String.contains_substring name "key" then
+            if contains_substring name "key" then
               Hashtbl.add ctx.taint_map id KeyMaterial
-            else if String.contains_substring name "iv" || 
-                    String.contains_substring name "nonce" then
+            else if contains_substring name "iv" || 
+                    contains_substring name "nonce" then
               Hashtbl.add ctx.taint_map id IVMaterial
         | _ -> ()
     end

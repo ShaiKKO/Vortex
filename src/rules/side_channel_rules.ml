@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* SIDE001: Variable-Time String Comparison *)
 let variable_time_comparison_rule : Rule.t = {
@@ -23,7 +24,7 @@ let variable_time_comparison_rule : Rule.t = {
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} ->
                   let lower = String.lowercase_ascii name in
-                  if List.exists (fun kw -> String.contains_substring lower kw)
+                  if List.exists (fun kw -> contains_substring lower kw)
                       ["key"; "password"; "token"; "hmac"; "mac"; "signature"; 
                        "hash"; "digest"; "secret"; "auth"] then
                     sensitive_vars := name :: !sensitive_vars
@@ -91,8 +92,8 @@ let non_constant_modexp_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let path = Longident.flatten txt |> String.concat "." in
             if List.mem path ["Z.powm"; "Big_int.power_big_int_positive_big_int"] ||
-               (String.contains_substring path "pow" && 
-                String.contains_substring path "mod") then
+               (contains_substring path "pow" && 
+                contains_substring path "mod") then
               findings := {
                 rule_id = "SIDE002";
                 severity = Warning;
@@ -146,7 +147,7 @@ let cache_timing_rule : Rule.t = {
               match arg.pexp_desc with
               | Pexp_ident {txt = Lident name; _} ->
                   List.exists (fun pattern ->
-                    String.contains_substring (String.lowercase_ascii name) pattern
+                    contains_substring (String.lowercase_ascii name) pattern
                   ) sbox_patterns
               | _ -> false
             ) args in
@@ -205,7 +206,7 @@ let branch_leak_rule : Rule.t = {
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} when 
-                  List.exists (fun s -> String.contains_substring (String.lowercase_ascii name) s)
+                  List.exists (fun s -> contains_substring (String.lowercase_ascii name) s)
                     ["secret"; "private"; "key"; "nonce"] ->
                   secret_vars := name :: !secret_vars
               | _ -> ()
@@ -271,14 +272,14 @@ let power_analysis_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             (* Detect operations with data-dependent power consumption *)
-            if (String.contains_substring path "multiplication" ||
-                String.contains_substring path "mult" ||
-                String.contains_substring path "square") &&
+            if (contains_substring path "multiplication" ||
+                contains_substring path "mult" ||
+                contains_substring path "square") &&
                List.exists (fun (_, arg) ->
                  match arg.pexp_desc with
                  | Pexp_ident {txt = Lident name; _} ->
-                     String.contains_substring (String.lowercase_ascii name) "key" ||
-                     String.contains_substring (String.lowercase_ascii name) "secret"
+                     contains_substring (String.lowercase_ascii name) "key" ||
+                     contains_substring (String.lowercase_ascii name) "secret"
                  | _ -> false
                ) args then
               findings := {

@@ -1,5 +1,6 @@
 open Types
 open Rule_engine
+open Utils
 
 (* CVE-2016-2107: OpenSSL AES-NI timing attack *)
 let timing_attack_rule : Rule.t = {
@@ -22,7 +23,7 @@ let timing_attack_rule : Rule.t = {
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} ->
                   let lower = String.lowercase_ascii name in
-                  if List.exists (fun kw -> String.contains_substring lower kw)
+                  if List.exists (fun kw -> contains_substring lower kw)
                       ["key"; "password"; "hmac"; "signature"; "mac"] then
                     sensitive_vars := name :: !sensitive_vars
               | _ -> ()
@@ -131,7 +132,7 @@ let weak_rsa_key_rule : Rule.t = {
             match arg.pexp_desc with
             | Pexp_ident {txt = Ldot (m, _); _} -> 
                 String.lowercase_ascii (Longident.flatten m |> String.concat ".") |> fun s ->
-                String.contains_substring s "rsa"
+                contains_substring s "rsa"
             | _ -> false
           ) args ->
             List.iter (fun (label, arg) ->
@@ -186,7 +187,7 @@ let missing_mac_rule : Rule.t = {
       method! expression expr () =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (_, meth); _}; _}, _) ->
-            if String.contains_substring (String.lowercase_ascii meth) "cbc" then
+            if contains_substring (String.lowercase_ascii meth) "cbc" then
               cbc_uses := expr.pexp_loc :: !cbc_uses
             else if List.mem (String.lowercase_ascii meth) ["hmac"; "mac"; "authenticate"] then
               mac_uses := expr.pexp_loc :: !mac_uses;
@@ -236,7 +237,7 @@ let rsa_timing_rule : Rule.t = {
       method! expression expr () =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (m, ("decrypt" | "sign")); _}; _}, _) 
-          when String.contains_substring (String.lowercase_ascii (Longident.flatten m |> String.concat ".")) "rsa" ->
+          when contains_substring (String.lowercase_ascii (Longident.flatten m |> String.concat ".")) "rsa" ->
             findings := {
               rule_id = "CVE_2018_0737";
               severity = Warning;

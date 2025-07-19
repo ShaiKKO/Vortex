@@ -1,4 +1,5 @@
 open Types
+open Analyzer_types
 
 module Parallel_engine = struct
   type work_item = {
@@ -32,7 +33,7 @@ module Parallel_engine = struct
       | Some work_item ->
           let result = 
             try
-              let findings = Analyzer.analyze_single_file analyzer_state work_item.file_path in
+              let findings = File_analyzer.analyze_single_file analyzer_state work_item.file_path in
               { file = work_item.file_path; findings; error = None }
             with e ->
               { file = work_item.file_path; 
@@ -54,7 +55,7 @@ module Parallel_engine = struct
     if num_domains <= 1 then
       (* Fall back to sequential *)
       List.iter (fun file ->
-        let _ = Analyzer.analyze_single_file analyzer_state file in ()
+        let _ = File_analyzer.analyze_single_file analyzer_state file in ()
       ) files
     else begin
       let work_queue = create_work_queue files in

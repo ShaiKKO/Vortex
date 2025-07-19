@@ -1,5 +1,5 @@
-(executable
- (public_name ocaml-crypto-linter)
+(executables
+ (public_names ocaml-crypto-linter ocaml-crypto-linter-simple) 
  (package ocaml-crypto-linter)
- (name main)
- (libraries ocaml_crypto_linter cmdliner))
+ (names main main_simple)
+ (libraries ocaml_crypto_linter cmdliner ppxlib))

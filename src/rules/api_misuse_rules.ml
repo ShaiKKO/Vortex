@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* API001: ECB Mode Usage *)
 let ecb_mode_rule : Rule.t = {
@@ -19,7 +20,7 @@ let ecb_mode_rule : Rule.t = {
         match expr.pexp_desc with
         | Pexp_ident {txt; _} | Pexp_construct ({txt; _}, _) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
-            if String.contains_substring path "ecb" then
+            if contains_substring path "ecb" then
               findings := {
                 rule_id = "API001";
                 severity = Error;
@@ -70,9 +71,9 @@ let cbc_without_mac_rule : Rule.t = {
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
-            if String.contains_substring path "cbc" then
+            if contains_substring path "cbc" then
               cbc_locations := expr.pexp_loc :: !cbc_locations
-            else if List.exists (fun m -> String.contains_substring path m) 
+            else if List.exists (fun m -> contains_substring path m) 
                       ["hmac"; "mac"; "authenticate"; "poly1305"] then
               mac_locations := expr.pexp_loc :: !mac_locations;
             super#expression expr ()
@@ -138,8 +139,8 @@ let improper_iv_generation_rule : Rule.t = {
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} when 
-                  String.contains_substring (String.lowercase_ascii name) "iv" ||
-                  String.contains_substring (String.lowercase_ascii name) "nonce" ->
+                  contains_substring (String.lowercase_ascii name) "iv" ||
+                  contains_substring (String.lowercase_ascii name) "nonce" ->
                   (match vb.pvb_expr.pexp_desc with
                   | Pexp_constant (Pconst_string (_, _, _)) ->
                       findings := {
@@ -209,9 +210,9 @@ let missing_padding_validation_rule : Rule.t = {
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
-            if String.contains_substring path "decrypt" &&
-               (String.contains_substring path "cbc" || 
-                String.contains_substring path "ecb") then
+            if contains_substring path "decrypt" &&
+               (contains_substring path "cbc" || 
+                contains_substring path "ecb") then
               findings := {
                 rule_id = "API004";
                 severity = Warning;
@@ -339,8 +340,8 @@ let unverified_certificates_rule : Rule.t = {
         | Pexp_record (fields, _) ->
             let is_tls_config = List.exists (fun (field, _) ->
               match field.txt with
-              | Lident name -> String.contains_substring name "authenticator" ||
-                               String.contains_substring name "certificates"
+              | Lident name -> contains_substring name "authenticator" ||
+                               contains_substring name "certificates"
               | _ -> false
             ) fields in
             
@@ -349,8 +350,8 @@ let unverified_certificates_rule : Rule.t = {
                 match field.txt, value.pexp_desc with
                 | Lident "authenticator", Pexp_construct ({txt = Lident "None"; _}, _) -> true
                 | Lident "authenticator", Pexp_ident {txt = Lident name; _} ->
-                    String.contains_substring (String.lowercase_ascii name) "null" ||
-                    String.contains_substring (String.lowercase_ascii name) "none"
+                    contains_substring (String.lowercase_ascii name) "null" ||
+                    contains_substring (String.lowercase_ascii name) "none"
                 | _ -> false
               ) fields in
               
@@ -405,7 +406,7 @@ let missing_ctr_increment_rule : Rule.t = {
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
-            if String.contains_substring path "ctr" then
+            if contains_substring path "ctr" then
               List.iter (fun (label, arg) ->
                 match label with
                 | Asttypes.Labelled ("ctr" | "counter" | "nonce") ->

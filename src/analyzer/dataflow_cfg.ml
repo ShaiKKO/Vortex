@@ -1,4 +1,5 @@
 open Types
+open Utils
 
 module Cfg = struct
   type node_id = int
@@ -163,7 +164,7 @@ module Dataflow = struct
   
   and analyze_binding state vb =
     match vb.pvb_pat.ppat_desc with
-    | Ppat_var {txt = name; _} when String.contains_substring name "nonce" ->
+    | Ppat_var {txt = name; _} when contains_substring name "nonce" ->
         match state with
         | Value s -> Value {s with nonces = (name, Fresh) :: s.nonces}
         | _ -> state

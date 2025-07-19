@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* DEP001: Outdated Cryptokit *)
 let outdated_cryptokit_rule : Rule.t = {
@@ -283,7 +284,7 @@ let insecure_config_rule : Rule.t = {
             let path = Longident.flatten txt |> String.concat "." in
             
             (* Check for SSL/TLS without proper config *)
-            if String.contains_substring path "Ssl.create_context" then
+            if contains_substring path "Ssl.create_context" then
               let has_protocol_config = List.exists (fun (label, _) ->
                 match label with
                 | Asttypes.Labelled l -> List.mem l ["protocol"; "min_protocol"]

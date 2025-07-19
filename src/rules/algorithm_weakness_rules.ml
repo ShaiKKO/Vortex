@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* ALGO001: Weak Ciphers *)
 let weak_cipher_rule : Rule.t = {
@@ -28,7 +29,7 @@ let weak_cipher_rule : Rule.t = {
         | Pexp_ident {txt; _} | Pexp_construct ({txt; _}, _) ->
             let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (pattern, name) ->
-              if String.contains_substring path_str pattern then
+              if contains_substring path_str pattern then
                 findings := {
                   rule_id = "ALGO001";
                   severity = Error;
@@ -84,8 +85,8 @@ let weak_hash_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (pattern, name, cve) ->
-              if String.contains_substring path_str pattern && 
-                 String.contains_substring path_str "hash" then
+              if contains_substring path_str pattern && 
+                 contains_substring path_str "hash" then
                 findings := {
                   rule_id = "ALGO002";
                   severity = Error;
@@ -144,7 +145,7 @@ let insecure_ecc_curve_rule : Rule.t = {
         | Pexp_construct ({txt = Lident s; _}, _) ->
             let lower = String.lowercase_ascii s in
             List.iter (fun (pattern, reason) ->
-              if String.contains_substring lower pattern then
+              if contains_substring lower pattern then
                 findings := {
                   rule_id = "ALGO003";
                   severity = Error;
@@ -197,7 +198,7 @@ let small_block_cipher_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             if List.exists (fun cipher -> 
-              String.contains_substring path_str cipher
+              contains_substring path_str cipher
             ) small_block_ciphers then
               findings := {
                 rule_id = "ALGO004";
@@ -244,7 +245,7 @@ let weak_key_exchange_rule : Rule.t = {
       method! expression expr () =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) 
-          when String.contains_substring (Longident.flatten txt |> String.concat "." |> String.lowercase_ascii) "dh" ->
+          when contains_substring (Longident.flatten txt |> String.concat "." |> String.lowercase_ascii) "dh" ->
             List.iter (fun (label, arg) ->
               match label, arg.pexp_desc with
               | Asttypes.Labelled ("bits" | "size" | "modulus_size"), 
@@ -308,7 +309,7 @@ let legacy_tls_rule : Rule.t = {
         | Pexp_constant (Pconst_string (s, _, _)) ->
             let lower = String.lowercase_ascii s in
             List.iter (fun (pattern, name, reason) ->
-              if String.contains_substring lower pattern then
+              if contains_substring lower pattern then
                 findings := {
                   rule_id = "ALGO006";
                   severity = Error;

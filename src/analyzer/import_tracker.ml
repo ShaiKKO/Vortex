@@ -58,7 +58,7 @@ let get_crypto_modules = function
   | Custom name -> [name]
 
 class import_tracker ctx = object(self)
-  inherit [unit] Ast_traverse.iter as super
+  inherit Ast_traverse.iter as super
   
   method! structure_item item () =
     match item.pstr_desc with

@@ -1,4 +1,5 @@
 open Types
+open Utils
 
 module Context_manager = struct
   type module_info = {
@@ -202,12 +203,12 @@ module Context_manager = struct
       match expr.pexp_desc with
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
           let path = Longident.flatten txt |> String.concat "." in
-          if String.contains_substring path "key" then CryptoKey
-          else if String.contains_substring path "nonce" || 
-                  String.contains_substring path "iv" then Nonce
-          else if String.contains_substring path "hash" then Hash
-          else if String.contains_substring path "encrypt" then Ciphertext
-          else if String.contains_substring path "decrypt" then Plaintext
+          if contains_substring path "key" then CryptoKey
+          else if contains_substring path "nonce" || 
+                  contains_substring path "iv" then Nonce
+          else if contains_substring path "hash" then Hash
+          else if contains_substring path "encrypt" then Ciphertext
+          else if contains_substring path "decrypt" then Plaintext
           else Unknown
       | _ -> Unknown
     
@@ -216,7 +217,7 @@ module Context_manager = struct
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
           let path = Longident.flatten txt |> String.concat "." in
           List.exists (fun pattern ->
-            String.contains_substring (String.lowercase_ascii path) pattern
+            contains_substring (String.lowercase_ascii path) pattern
           ) ["crypto"; "cipher"; "hash"; "sign"; "encrypt"; "decrypt"; 
              "key"; "nonce"; "random"; "hmac"; "aes"; "rsa"]
       | _ -> false
@@ -226,19 +227,19 @@ module Context_manager = struct
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
           let path = Longident.flatten txt |> String.concat "." in
           let op_type = 
-            if String.contains_substring path "encrypt" then 
+            if contains_substring path "encrypt" then 
               Some (Encryption path)
-            else if String.contains_substring path "decrypt" then 
+            else if contains_substring path "decrypt" then 
               Some (Decryption path)
-            else if String.contains_substring path "hash" then 
+            else if contains_substring path "hash" then 
               Some (Hashing path)
-            else if String.contains_substring path "sign" then 
+            else if contains_substring path "sign" then 
               Some Signing
-            else if String.contains_substring path "verify" then 
+            else if contains_substring path "verify" then 
               Some Verification
-            else if String.contains_substring path "random" then 
+            else if contains_substring path "random" then 
               Some RandomGeneration
-            else if String.contains_substring path "derive" then 
+            else if contains_substring path "derive" then 
               Some KeyDerivation
             else None
           in
@@ -394,7 +395,7 @@ module Context_manager = struct
           crypto_operations = List.length info.crypto_operations;
           imports_crypto = List.exists (fun imp ->
             List.exists (fun lib ->
-              String.contains_substring imp 
+              contains_substring imp 
                 (Import_tracker.get_crypto_modules lib |> List.hd)
             ) [Import_tracker.Cryptokit; Import_tracker.Nocrypto; Import_tracker.Mirage_crypto]
           ) info.imports;

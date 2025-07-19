@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* Enhanced context tracking *)
 module Context = struct
@@ -19,9 +20,9 @@ module Context = struct
   }
   
   let is_test_file filename =
-    String.contains_substring filename "_test.ml" ||
-    String.contains_substring filename "test_" ||
-    String.contains_substring filename "/test/"
+    contains_substring filename "_test.ml" ||
+    contains_substring filename "test_" ||
+    contains_substring filename "/test/"
 end
 
 (* SIDE001: Variable-Time String Comparison - Enhanced *)
@@ -73,10 +74,10 @@ let variable_time_comparison_rule_v2 : Rule.t = {
                     | _ -> false
                   in
                   
-                  if from_crypto && List.exists (fun kw -> String.contains_substring lower kw)
+                  if from_crypto && List.exists (fun kw -> contains_substring lower kw)
                       ["mac"; "hmac"; "signature"; "digest"; "tag"] then
                     sensitive_vars := (name, "crypto_output") :: !sensitive_vars
-                  else if List.exists (fun kw -> String.contains_substring lower kw)
+                  else if List.exists (fun kw -> contains_substring lower kw)
                       ["key"; "password"; "secret"; "token"] then
                     sensitive_vars := (name, "secret_material") :: !sensitive_vars
               | _ -> ()
@@ -171,9 +172,9 @@ let cache_timing_rule_v2 : Rule.t = {
             let path = Longident.flatten txt |> String.concat "." in
             
             (* Check if we're in crypto code *)
-            if String.contains_substring path "Cipher" || 
-               String.contains_substring path "aes" ||
-               String.contains_substring path "des" then
+            if contains_substring path "Cipher" || 
+               contains_substring path "aes" ||
+               contains_substring path "des" then
               crypto_context := true;
             
             (* Array access analysis *)
@@ -183,7 +184,7 @@ let cache_timing_rule_v2 : Rule.t = {
                   match args with
                   | [(_, {pexp_desc = Pexp_ident {txt = Lident name; _}; _}); _] ->
                       let is_crypto = List.exists (fun pattern ->
-                        String.contains_substring (String.lowercase_ascii name) pattern
+                        contains_substring (String.lowercase_ascii name) pattern
                       ) sbox_patterns in
                       let size = try Some (Hashtbl.find table_sizes name) with Not_found -> None in
                       (Some name, is_crypto, size)
@@ -262,10 +263,10 @@ let branch_leak_rule_v2 : Rule.t = {
               | Ppat_var {txt = name; _}, Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
                   let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
                   (* Mark variable as tainted if it comes from crypto operation *)
-                  if List.exists (fun src -> String.contains_substring path src) crypto_sources then
+                  if List.exists (fun src -> contains_substring path src) crypto_sources then
                     Hashtbl.add tainted_vars name "crypto_data"
-                  else if String.contains_substring (String.lowercase_ascii name) "secret" ||
-                          String.contains_substring (String.lowercase_ascii name) "private" then
+                  else if contains_substring (String.lowercase_ascii name) "secret" ||
+                          contains_substring (String.lowercase_ascii name) "private" then
                     Hashtbl.add tainted_vars name "named_secret"
               | _ -> ()
             ) bindings;

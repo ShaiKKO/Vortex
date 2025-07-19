@@ -1,6 +1,7 @@
 (* Interprocedural analysis framework for tracking data flow across functions *)
 open Types
 open Ppxlib
+open Utils
 
 module Function_summary = struct
   type parameter_info = {
@@ -153,7 +154,7 @@ module Interprocedural_analyzer = struct
   let is_crypto_operation ctx name =
     let lower = String.lowercase_ascii name in
     List.exists (fun pattern ->
-      String.contains_substring lower pattern
+      contains_substring lower pattern
     ) ctx.crypto_patterns
 
   let analyze_function_call ctx caller_taint callee_name args =

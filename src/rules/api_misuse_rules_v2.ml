@@ -3,6 +3,7 @@ open Types
 open Rule_engine
 open Ppxlib
 open Interprocedural
+open Utils
 
 (* API006: CBC Without MAC - Enhanced with interprocedural analysis *)
 let cbc_without_mac_rule_v2 : Rule.t = {
@@ -18,9 +19,9 @@ let cbc_without_mac_rule_v2 : Rule.t = {
     let check_cbc_without_mac func_name node taint_state =
       let has_cbc_encrypt = List.exists (fun call ->
         let callee_lower = String.lowercase_ascii call.Function_summary.callee in
-        String.contains_substring callee_lower "cbc" && 
-        (String.contains_substring callee_lower "encrypt" ||
-         String.contains_substring callee_lower "cipher")
+        contains_substring callee_lower "cbc" && 
+        (contains_substring callee_lower "encrypt" ||
+         contains_substring callee_lower "cipher")
       ) node.summary.calls in
       
       if not has_cbc_encrypt then None
@@ -32,10 +33,10 @@ let cbc_without_mac_rule_v2 : Rule.t = {
           | Some callee_node ->
               List.exists (fun call ->
                 let name = String.lowercase_ascii call.Function_summary.callee in
-                String.contains_substring name "mac" ||
-                String.contains_substring name "hmac" ||
-                String.contains_substring name "authenticate" ||
-                String.contains_substring name "tag"
+                contains_substring name "mac" ||
+                contains_substring name "hmac" ||
+                contains_substring name "authenticate" ||
+                contains_substring name "tag"
               ) callee_node.summary.calls
           | None -> false
         ) all_callees in
@@ -45,8 +46,8 @@ let cbc_without_mac_rule_v2 : Rule.t = {
           (* Find the CBC call location *)
           let cbc_call = List.find (fun call ->
             let callee_lower = String.lowercase_ascii call.Function_summary.callee in
-            String.contains_substring callee_lower "cbc" && 
-            String.contains_substring callee_lower "encrypt"
+            contains_substring callee_lower "cbc" && 
+            contains_substring callee_lower "encrypt"
           ) node.summary.calls in
           
           Some {
@@ -104,10 +105,10 @@ let encrypt_then_mac_rule_v2 : Rule.t = {
       let rec collect_ops calls =
         List.iter (fun call ->
           let name = String.lowercase_ascii call.Function_summary.callee in
-          if String.contains_substring name "encrypt" then
+          if contains_substring name "encrypt" then
             operations := ("encrypt", call.location) :: !operations
-          else if String.contains_substring name "mac" || 
-                  String.contains_substring name "hmac" then
+          else if contains_substring name "mac" || 
+                  contains_substring name "hmac" then
             operations := ("mac", call.location) :: !operations
           else
             (* Recursively check called functions *)
@@ -186,18 +187,18 @@ let key_reuse_rule_v2 : Rule.t = {
           Hashtbl.iter (fun var sources ->
             if List.exists (function
               | Taint_analysis.CryptoOperation op -> 
-                  String.contains_substring (String.lowercase_ascii op) "key" ||
-                  String.contains_substring (String.lowercase_ascii op) "derive"
+                  contains_substring (String.lowercase_ascii op) "key" ||
+                  contains_substring (String.lowercase_ascii op) "derive"
               | _ -> false
             ) sources then
               (* Track where this key is used *)
               List.iter (fun call ->
                 let is_crypto_use = 
-                  String.contains_substring 
+                  contains_substring 
                     (String.lowercase_ascii call.Function_summary.callee) "encrypt" ||
-                  String.contains_substring 
+                  contains_substring 
                     (String.lowercase_ascii call.Function_summary.callee) "sign" ||
-                  String.contains_substring 
+                  contains_substring 
                     (String.lowercase_ascii call.Function_summary.callee) "mac"
                 in
                 
@@ -225,10 +226,10 @@ let key_reuse_rule_v2 : Rule.t = {
       let unique_algorithms = 
         List.map (fun (callee, _) ->
           let lower = String.lowercase_ascii callee in
-          if String.contains_substring lower "aes" then "AES"
-          else if String.contains_substring lower "rsa" then "RSA"
-          else if String.contains_substring lower "hmac" then "HMAC"
-          else if String.contains_substring lower "sign" then "Signature"
+          if contains_substring lower "aes" then "AES"
+          else if contains_substring lower "rsa" then "RSA"
+          else if contains_substring lower "hmac" then "HMAC"
+          else if contains_substring lower "sign" then "Signature"
           else "Unknown"
         ) usages
         |> List.sort_uniq String.compare

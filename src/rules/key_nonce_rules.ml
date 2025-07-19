@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* KEY001: Hardcoded Cryptographic Keys *)
 let hardcoded_key_rule : Rule.t = {
@@ -27,7 +28,7 @@ let hardcoded_key_rule : Rule.t = {
               | Ppat_var {txt = name; _}, Pexp_constant (Pconst_string (value, _, _)) ->
                   let lower_name = String.lowercase_ascii name in
                   if List.exists (fun pattern -> 
-                    String.contains_substring lower_name pattern
+                    contains_substring lower_name pattern
                   ) key_patterns && String.length value >= 8 then
                     findings := {
                       rule_id = "KEY001";
@@ -80,10 +81,10 @@ let predictable_key_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
             let path = Longident.flatten txt |> String.concat "." in
             (* Check for weak random usage in key generation *)
-            if (String.contains_substring path "Random" && 
-                not (String.contains_substring path "Cryptokit" || 
-                     String.contains_substring path "Nocrypto" ||
-                     String.contains_substring path "Mirage_crypto")) &&
+            if (contains_substring path "Random" && 
+                not (contains_substring path "Cryptokit" || 
+                     contains_substring path "Nocrypto" ||
+                     contains_substring path "Mirage_crypto")) &&
                List.exists (fun (_, arg) ->
                  match arg.pexp_desc with
                  | Pexp_constant (Pconst_integer (n, _)) ->
@@ -142,8 +143,8 @@ let aead_nonce_reuse_rule : Rule.t = {
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} when 
-                  String.contains_substring (String.lowercase_ascii name) "nonce" ||
-                  String.contains_substring (String.lowercase_ascii name) "iv" ->
+                  contains_substring (String.lowercase_ascii name) "nonce" ||
+                  contains_substring (String.lowercase_ascii name) "iv" ->
                   Hashtbl.add nonce_tracking name vb.pvb_expr
               | _ -> ()
             ) bindings;
@@ -151,9 +152,9 @@ let aead_nonce_reuse_rule : Rule.t = {
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
-            if (String.contains_substring path "gcm" || 
-                String.contains_substring path "chacha20" ||
-                String.contains_substring path "authenticate_encrypt") then
+            if (contains_substring path "gcm" || 
+                contains_substring path "chacha20" ||
+                contains_substring path "authenticate_encrypt") then
               List.iter (fun (label, arg) ->
                 match label, arg.pexp_desc with
                 | Asttypes.Labelled ("nonce" | "iv"), Pexp_ident {txt = Lident nonce_var; _} ->
@@ -214,7 +215,7 @@ let static_iv_rule : Rule.t = {
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc, vb.pvb_expr.pexp_desc with
               | Ppat_var {txt = name; _}, Pexp_constant (Pconst_string (value, _, _))
-                when String.contains_substring (String.lowercase_ascii name) "iv" &&
+                when contains_substring (String.lowercase_ascii name) "iv" &&
                      String.for_all (fun c -> c = '\000') value ->
                   findings := {
                     rule_id = "KEY004";
@@ -272,7 +273,7 @@ let weak_kdf_iterations_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
             let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (kdf_name, min_value) ->
-              if String.contains_substring path kdf_name then
+              if contains_substring path kdf_name then
                 List.iter (fun (label, arg) ->
                   match label, arg.pexp_desc with
                   | Asttypes.Labelled ("iterations" | "count" | "n" | "time_cost"), 
@@ -333,8 +334,8 @@ let plaintext_key_storage_rule : Rule.t = {
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} when 
-                  String.contains_substring (String.lowercase_ascii name) "key" ||
-                  String.contains_substring (String.lowercase_ascii name) "secret" ->
+                  contains_substring (String.lowercase_ascii name) "key" ||
+                  contains_substring (String.lowercase_ascii name) "secret" ->
                   key_vars := name :: !key_vars
               | _ -> ()
             ) bindings;

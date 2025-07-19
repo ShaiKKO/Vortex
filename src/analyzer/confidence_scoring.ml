@@ -1,5 +1,6 @@
 (* Statistical confidence scoring for crypto vulnerability findings *)
 open Types
+open Utils
 
 module Confidence = struct
   type level = 
@@ -53,24 +54,24 @@ module Context_analyzer = struct
 
   let analyze_file_context filename =
     let is_test = 
-      String.contains_substring filename "_test.ml" ||
-      String.contains_substring filename "test_" ||
-      String.contains_substring filename "/test/" ||
-      String.contains_substring filename "/tests/"
+      contains_substring filename "_test.ml" ||
+      contains_substring filename "test_" ||
+      contains_substring filename "/test/" ||
+      contains_substring filename "/tests/"
     in
     
     let is_example =
-      String.contains_substring filename "/example/" ||
-      String.contains_substring filename "/examples/" ||
-      String.contains_substring filename "_example.ml" ||
-      String.contains_substring filename "demo"
+      contains_substring filename "/example/" ||
+      contains_substring filename "/examples/" ||
+      contains_substring filename "_example.ml" ||
+      contains_substring filename "demo"
     in
     
     let is_crypto =
-      String.contains_substring filename "crypto" ||
-      String.contains_substring filename "cipher" ||
-      String.contains_substring filename "auth" ||
-      String.contains_substring filename "security"
+      contains_substring filename "crypto" ||
+      contains_substring filename "cipher" ||
+      contains_substring filename "auth" ||
+      contains_substring filename "security"
     in
     
     {

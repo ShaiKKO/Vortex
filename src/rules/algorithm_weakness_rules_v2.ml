@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Ppxlib
+open Utils
 
 (* Context-aware analysis module *)
 module Algorithm_context = struct
@@ -24,11 +25,11 @@ module Algorithm_context = struct
     let ctx_string = String.lowercase_ascii ast_context in
     let var_lower = String.lowercase_ascii var_name in
     
-    if List.exists (fun p -> String.contains_substring ctx_string p || 
-                             String.contains_substring var_lower p) security_patterns then
+    if List.exists (fun p -> contains_substring ctx_string p || 
+                             contains_substring var_lower p) security_patterns then
       Security_critical
-    else if List.exists (fun p -> String.contains_substring ctx_string p ||
-                                  String.contains_substring var_lower p) non_security_patterns then
+    else if List.exists (fun p -> contains_substring ctx_string p ||
+                                  contains_substring var_lower p) non_security_patterns then
       Non_security
     else
       Unknown
@@ -71,8 +72,8 @@ let weak_hash_rule_v2 : Rule.t = {
             let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             
             List.iter (fun (pattern, name, cve, risk_level) ->
-              if String.contains_substring path_str pattern && 
-                 String.contains_substring path_str "hash" then
+              if contains_substring path_str pattern && 
+                 contains_substring path_str "hash" then
                 let usage_context = Algorithm_context.detect_usage_context !current_context "" in
                 
                 let (severity, extra_msg) = match usage_context, risk_level with
@@ -173,7 +174,7 @@ let weak_cipher_rule_v2 : Rule.t = {
             let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
             
             List.iter (fun (pattern, name, cipher_type, replacement) ->
-              if String.contains_substring path_str pattern then
+              if contains_substring path_str pattern then
                 let severity = if !in_legacy_code then Warning else Error in
                 
                 findings := {
@@ -255,7 +256,7 @@ let insecure_ecc_curve_rule_v2 : Rule.t = {
             let lower = String.lowercase_ascii s in
             
             List.iter (fun (pattern, name, severity, reason) ->
-              if String.contains_substring lower pattern then
+              if contains_substring lower pattern then
                 findings := {
                   rule_id = "ALGO003";
                   severity;

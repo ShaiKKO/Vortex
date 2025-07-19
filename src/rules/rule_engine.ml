@@ -1,4 +1,5 @@
 open Types
+open Utils
 
 module Rule = struct
   type t = {
@@ -48,7 +49,7 @@ let nonce_reuse_rule : Rule.t = {
               match vb.pvb_pat.ppat_desc with
               | Ppat_var {txt = name; _} when 
                   String.lowercase_ascii name |> fun n ->
-                  List.exists (fun s -> String.contains_substring n s) ["nonce"; "iv"] ->
+                  List.exists (fun s -> contains_substring n s) ["nonce"; "iv"] ->
                   Hashtbl.add nonce_vars name vb.pvb_expr.pexp_loc
               | _ -> ()
             ) bindings;
