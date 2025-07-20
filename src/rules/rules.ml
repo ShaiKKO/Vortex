@@ -13,6 +13,8 @@ module Cve = Cve_rules
 module Protocol = Protocol_rules
 module Sidechannel_advanced = Sidechannel_adv
 module Sidechannel_enhanced = Sidechannel_enhanced
+module Supply_chain = Supplychain_rules
+module Zkp = Zkp_rules
 
 (* Force protocol rules module to load by accessing a value *)
 let _ = Protocol_rules.jwt_algorithm_confusion_rule
@@ -20,6 +22,10 @@ let _ = Protocol_rules.jwt_algorithm_confusion_rule
 let _ = Sidechannel_adv.speculative_execution_rule
 (* Force enhanced side-channel rules to load *)
 let _ = Sidechannel_enhanced.enhanced_speculative_rule
+(* Force supply chain rules to load *)
+let _ = Supplychain_rules.known_vulnerability_rule
+(* Force ZKP rules to load *)
+let _ = Zkp_rules.under_constrained_circuit_rule
 
 (* Summary statistics *)
 let rule_statistics () =
