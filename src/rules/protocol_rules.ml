@@ -593,6 +593,7 @@ let saml_replay_rule : Rule.t = {
     let has_timestamp_check = ref false in
     let has_assertion_cache = ref false in
     let has_inresponseto = ref false in
+    let uses_saml = ref false in
     
     let visitor = object(self)
       inherit Ast_traverse.iter as super
@@ -610,6 +611,13 @@ let saml_replay_rule : Rule.t = {
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
             let func_path = flatten_longident txt |> String.concat "." in
             
+            (* Detect SAML usage *)
+            if contains_substring func_path "saml" || 
+               contains_substring func_path "SAML" ||
+               contains_substring func_path "assertion" ||
+               contains_substring func_path "Saml" then
+              uses_saml := true;
+            
             (* Check for assertion ID caching *)
             if contains_substring func_path "cache" && 
                contains_substring func_path "assertion" then
@@ -626,8 +634,8 @@ let saml_replay_rule : Rule.t = {
     
     visitor#structure ast;
     
-    (* Flag missing replay protections *)
-    if not !has_timestamp_check || not !has_assertion_cache then
+    (* Flag missing replay protections only if SAML is used *)
+    if !uses_saml && (not !has_timestamp_check || not !has_assertion_cache) then
       findings := {
         rule_id = "PROTO006";
         severity = Error;
