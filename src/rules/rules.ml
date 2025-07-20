@@ -1,15 +1,19 @@
 (* Main rules module that aggregates all rule categories *)
 
-(* Load all rule modules to register them with the engine *)
+(* Export the main registry first *)
+module Registry = Rule_engine.Registry
+
+(* Load all rule modules - this forces their initialization *)
 module Algorithm_rules = Algorithm_weakness_rules
 module Key_rules = Key_nonce_rules  
 module Side_channel = Side_channel_rules
 module Api_rules = Api_misuse_rules
 module Dependency = Dependency_rules
 module Cve = Cve_rules
+module Protocol = Protocol_rules
 
-(* Export the main registry *)
-module Registry = Rule_engine.Registry
+(* Force protocol rules module to load by accessing a value *)
+let _ = Protocol_rules.jwt_algorithm_confusion_rule
 
 (* Summary statistics *)
 let rule_statistics () =

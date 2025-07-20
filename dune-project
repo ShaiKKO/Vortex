@@ -32,7 +32,17 @@
   (odoc :with-doc)
   (alcotest (and :with-test (>= 1.7.0)))
   (cryptokit (and :with-test (>= 1.19)))
-  (nocrypto (and :with-test (>= 0.5.4))))
+  (nocrypto (and :with-test (>= 0.5.4)))
+  ; New dependencies for enhanced security rules
+  ; (jose (>= 0.9.0)) ; JWT/JWS/JWE support - optional
+  ; (saml (>= 0.2.0)) ; SAML protocol support - optional
+  ; (x509 (>= 0.16.0)) ; X.509 certificate handling - optional
+  (zarith (>= 1.13)) ; For ZKP arithmetic
+  ; (pkcs11 (>= 1.0.1)) ; HSM PKCS#11 interface - optional
+  ; (tls (>= 0.17.0)) ; TLS protocol analysis - optional
+  ; (cohttp-lwt-unix (>= 5.3.0)) ; HTTP client - optional
+  ; (opam-core (>= 2.1.0)) ; Package metadata analysis - optional
+  )
  (tags
   (topics cryptography security static-analysis linter)))
 

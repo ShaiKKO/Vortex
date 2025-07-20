@@ -25,6 +25,7 @@ depends: [
   "alcotest" {with-test & >= "1.7.0"}
   "cryptokit" {with-test & >= "1.19"}
   "nocrypto" {with-test & >= "0.5.4"}
+  "zarith" {>= "1.13"}
 ]
 build: [
   ["dune" "subst"] {dev}

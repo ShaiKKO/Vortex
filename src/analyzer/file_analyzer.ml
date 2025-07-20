@@ -44,6 +44,16 @@ let rec analyze_single_file state file_path =
       in
       file_findings := !file_findings @ cve_findings;
       
+      (* Protocol security rules *)
+      let protocol_findings = 
+        List.concat_map (fun rule ->
+          rule.Rule_engine.Rule.check ast
+        ) (Rule_engine.Registry.rules_by_tag "jwt" @ 
+           Rule_engine.Registry.rules_by_tag "oauth" @
+           Rule_engine.Registry.rules_by_tag "saml")
+      in
+      file_findings := !file_findings @ protocol_findings;
+      
       (* Dataflow analysis if enabled *)
       if state.config.enable_dataflow then begin
         let dataflow_findings = Dataflow_cfg.analyze_dataflow ast in

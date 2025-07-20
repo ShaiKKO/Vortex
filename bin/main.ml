@@ -2,6 +2,10 @@ open Cmdliner
 open Ocaml_crypto_linter
 open Ocaml_crypto_linter.Types
 
+(* Force loading of all rules by explicitly referencing the Rules module *)
+module Rules = Ocaml_crypto_linter.Rules
+let () = ignore Rules.rule_statistics
+
 let analyze_files files output_format output_file enable_semgrep =
   let start_time = Unix.gettimeofday () in
   let all_findings = ref [] in
@@ -21,9 +25,10 @@ let analyze_files files output_format output_file enable_semgrep =
       let ast_findings = Ast_analyzer.analyze_structure structure in
       
       (* Run registered rules *)
+      let all_rules = Rules.Registry.all_rules () in
       let rule_findings = List.concat_map (fun rule ->
         rule.Rule_engine.Rule.check structure
-      ) (Rule_engine.Registry.all_rules ()) in
+      ) all_rules in
       
       all_findings := !all_findings @ ast_findings @ rule_findings;
       incr files_analyzed

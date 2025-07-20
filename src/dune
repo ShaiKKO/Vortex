@@ -15,7 +15,16 @@
   nocrypto
   cmdliner
   unix
-  threads.posix)
+  threads.posix
+  ; New libraries for enhanced rules (comment out unavailable)
+  ; jose
+  ; x509
+  zarith
+  ; pkcs11
+  ; tls
+  ; cohttp-lwt-unix
+  ; opam-core
+  )
  (preprocess
   (pps ppxlib.metaquot)))
 

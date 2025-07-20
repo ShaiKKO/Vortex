@@ -24,6 +24,14 @@ type crypto_vulnerability =
   | MissingAuthentication
   | WeakKDF
   | InsecureMode of string
+  (* Protocol vulnerabilities *)
+  | AuthBypass
+  | ReplayAttack
+  | CSRF
+  | InfoDisclosure
+  | InsecureProtocol
+  | SignatureBypass
+  | ImproperValidation
 
 type finding = {
   rule_id: string;
@@ -75,6 +83,14 @@ module Json_conv = struct
     | MissingAuthentication -> `Assoc [("type", `String "missing_authentication")]
     | WeakKDF -> `Assoc [("type", `String "weak_kdf")]
     | InsecureMode mode -> `Assoc [("type", `String "insecure_mode"); ("mode", `String mode)]
+    (* Protocol vulnerabilities *)
+    | AuthBypass -> `Assoc [("type", `String "auth_bypass")]
+    | ReplayAttack -> `Assoc [("type", `String "replay_attack")]
+    | CSRF -> `Assoc [("type", `String "csrf")]
+    | InfoDisclosure -> `Assoc [("type", `String "info_disclosure")]
+    | InsecureProtocol -> `Assoc [("type", `String "insecure_protocol")]
+    | SignatureBypass -> `Assoc [("type", `String "signature_bypass")]
+    | ImproperValidation -> `Assoc [("type", `String "improper_validation")]
   
   let finding_to_json f =
     `Assoc [
