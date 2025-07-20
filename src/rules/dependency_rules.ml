@@ -16,10 +16,10 @@ let outdated_cryptokit_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             if String.starts_with ~prefix:"Cryptokit" module_name then
               findings := {
                 rule_id = "DEP001";
@@ -44,11 +44,11 @@ let outdated_cryptokit_rule : Rule.t = {
                   "https://github.com/xavierleroy/cryptokit/security/advisories/GHSA-v82j-px48-7869";
                 ];
               } :: !findings;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -65,10 +65,10 @@ let deprecated_nocrypto_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             if String.starts_with ~prefix:"Nocrypto" module_name then
               findings := {
                 rule_id = "DEP002";
@@ -94,11 +94,11 @@ let deprecated_nocrypto_rule : Rule.t = {
                   "https://github.com/mirage/mirage-crypto";
                 ];
               } :: !findings;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -115,10 +115,10 @@ let vulnerable_ssl_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             if List.mem module_name ["Ssl"; "Lwt_ssl"] then
               findings := {
                 rule_id = "DEP003";
@@ -144,11 +144,11 @@ let vulnerable_ssl_rule : Rule.t = {
                   "https://github.com/savonet/ocaml-ssl/releases/tag/0.5.9";
                 ];
               } :: !findings;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -165,10 +165,10 @@ let unpatched_tls_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             if String.starts_with ~prefix:"Tls" module_name then
               findings := {
                 rule_id = "DEP004";
@@ -195,11 +195,11 @@ let unpatched_tls_rule : Rule.t = {
                   "https://tls.mbed.org/security";
                 ];
               } :: !findings;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -217,10 +217,10 @@ let missing_updates_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             let crypto_patterns = [
               "Cryptokit"; "Nocrypto"; "Mirage_crypto"; "Tls"; 
               "X509"; "Ssl"; "Sodium"; "Hacl_star"
@@ -229,11 +229,11 @@ let missing_updates_rule : Rule.t = {
               String.starts_with ~prefix:pattern module_name
             ) crypto_patterns then
               crypto_libs := module_name :: !crypto_libs;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     
     if !crypto_libs <> [] then
       findings := {
@@ -278,10 +278,10 @@ let insecure_config_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             
             (* Check for SSL/TLS without proper config *)
             if contains_substring path "Ssl.create_context" then
@@ -318,11 +318,11 @@ let insecure_config_rule : Rule.t = {
                     "https://wiki.mozilla.org/Security/Server_Side_TLS";
                   ];
                 } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

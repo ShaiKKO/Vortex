@@ -16,10 +16,10 @@ let ecb_mode_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_ident {txt; _} | Pexp_construct ({txt; _}, _) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if contains_substring path "ecb" then
               findings := {
                 rule_id = "API001";
@@ -44,11 +44,11 @@ let ecb_mode_rule : Rule.t = {
                   "CWE-327";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -67,20 +67,20 @@ let cbc_without_mac_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if contains_substring path "cbc" then
               cbc_locations := expr.pexp_loc :: !cbc_locations
             else if List.exists (fun m -> contains_substring path m) 
                       ["hmac"; "mac"; "authenticate"; "poly1305"] then
               mac_locations := expr.pexp_loc :: !mac_locations;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     
     (* Check if CBC is used without nearby MAC *)
     List.iter (fun cbc_loc ->
@@ -133,7 +133,7 @@ let improper_iv_generation_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -185,11 +185,11 @@ let improper_iv_generation_rule : Rule.t = {
                   | _ -> ())
               | _ -> ()
             ) bindings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -206,10 +206,10 @@ let missing_padding_validation_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if contains_substring path "decrypt" &&
                (contains_substring path "cbc" || 
                 contains_substring path "ecb") then
@@ -239,11 +239,11 @@ let missing_padding_validation_rule : Rule.t = {
                   "https://www.openssl.org/~bodo/ssl-poodle.pdf";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -260,10 +260,10 @@ let incorrect_random_usage_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             
             (* Check for Random.self_init in crypto context *)
             if path = "Random.self_init" then
@@ -314,11 +314,11 @@ let incorrect_random_usage_rule : Rule.t = {
                       } :: !findings
                 | _ -> ()
               ) args;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -335,7 +335,7 @@ let unverified_certificates_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_record (fields, _) ->
             let is_tls_config = List.exists (fun (field, _) ->
@@ -380,11 +380,11 @@ let unverified_certificates_rule : Rule.t = {
                     "https://owasp.org/www-project-mobile-top-10/2016-risks/m3-insecure-communication";
                   ];
                 } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -402,10 +402,10 @@ let missing_ctr_increment_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if contains_substring path "ctr" then
               List.iter (fun (label, arg) ->
                 match label with
@@ -445,11 +445,11 @@ let missing_ctr_increment_rule : Rule.t = {
                     | _ -> ())
                 | _ -> ()
               ) args;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

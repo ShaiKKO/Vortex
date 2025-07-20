@@ -1,6 +1,7 @@
 open Types
 open Rule_engine
 open Utils
+open Ppxlib
 
 (* CVE-2016-2107: OpenSSL AES-NI timing attack *)
 let timing_attack_rule : Rule.t = {
@@ -16,7 +17,7 @@ let timing_attack_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -28,7 +29,7 @@ let timing_attack_rule : Rule.t = {
                     sensitive_vars := name :: !sensitive_vars
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Lident ("=" | "<>" | "String.equal"); _}; _}, args) ->
             let involves_sensitive = List.exists (fun (_, arg) ->
@@ -53,12 +54,12 @@ let timing_attack_rule : Rule.t = {
                 suggestion = Some "Use constant-time comparison: Cryptokit.compare_constant_time or Nocrypto.Uncommon.Cs.ct_eq";
                 references = ["CVE-2016-2107"; "https://codahale.com/a-lesson-in-timing-attacks/"];
               } :: !findings;
-            super#expression expr ()
+            super#expression expr
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -75,7 +76,7 @@ let weak_kdf_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (_, "pbkdf2"); _}; _}, args) ->
             List.iter (fun (label, arg) ->
@@ -103,12 +104,12 @@ let weak_kdf_rule : Rule.t = {
                   | _ -> ())
               | _ -> ()
             ) args;
-            super#expression expr ()
+            super#expression expr
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -125,13 +126,13 @@ let weak_rsa_key_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (_, ("new_key" | "generate_key")); _}; _}, args) 
           when List.exists (fun (_, arg) ->
             match arg.pexp_desc with
             | Pexp_ident {txt = Ldot (m, _); _} -> 
-                String.lowercase_ascii (Longident.flatten m |> String.concat ".") |> fun s ->
+                String.lowercase_ascii (flatten_longident m |> String.concat ".") |> fun s ->
                 contains_substring s "rsa"
             | _ -> false
           ) args ->
@@ -160,12 +161,12 @@ let weak_rsa_key_rule : Rule.t = {
                   | _ -> ())
               | _ -> ()
             ) args;
-            super#expression expr ()
+            super#expression expr
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -184,19 +185,19 @@ let missing_mac_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (_, meth); _}; _}, _) ->
             if contains_substring (String.lowercase_ascii meth) "cbc" then
               cbc_uses := expr.pexp_loc :: !cbc_uses
             else if List.mem (String.lowercase_ascii meth) ["hmac"; "mac"; "authenticate"] then
               mac_uses := expr.pexp_loc :: !mac_uses;
-            super#expression expr ()
+            super#expression expr
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     
     (* Simple heuristic: if CBC is used but no MAC in same file *)
     if !cbc_uses <> [] && !mac_uses = [] then
@@ -234,7 +235,7 @@ let rsa_timing_rule : Rule.t = {
     let visitor = object(self)
       inherit Ppxlib.Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (m, ("decrypt" | "sign")); _}; _}, _) 
           when contains_substring (String.lowercase_ascii (Longident.flatten m |> String.concat ".")) "rsa" ->
@@ -253,12 +254,12 @@ let rsa_timing_rule : Rule.t = {
               suggestion = Some "Ensure RSA implementation uses blinding and constant-time modular exponentiation";
               references = ["CVE-2018-0737"; "https://eprint.iacr.org/2018/367"];
             } :: !findings;
-            super#expression expr ()
+            super#expression expr
         
-        | _ -> super#expression expr ()
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

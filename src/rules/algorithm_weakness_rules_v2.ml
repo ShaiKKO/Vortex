@@ -55,7 +55,7 @@ let weak_hash_rule_v2 : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_value (_, bindings) ->
             List.iter (fun vb ->
@@ -63,13 +63,13 @@ let weak_hash_rule_v2 : Rule.t = {
               | Ppat_var {txt = name; _} -> current_context := name
               | _ -> ()
             ) bindings;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path_str = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             
             List.iter (fun (pattern, name, cve, risk_level) ->
               if contains_substring path_str pattern && 
@@ -130,11 +130,11 @@ let weak_hash_rule_v2 : Rule.t = {
                   ];
                 } :: !findings
             ) weak_hashes;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -160,18 +160,18 @@ let weak_cipher_rule_v2 : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         (* Check for legacy markers in comments *)
         match item.pstr_desc with
         | Pstr_attribute {attr_name = {txt = "deprecated"; _}; _} ->
             in_legacy_code := true
         | _ -> ();
-        super#structure_item item ()
+        super#structure_item item
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_ident {txt; _} | Pexp_construct ({txt; _}, _) ->
-            let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path_str = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             
             List.iter (fun (pattern, name, cipher_type, replacement) ->
               if contains_substring path_str pattern then
@@ -214,16 +214,16 @@ let weak_cipher_rule_v2 : Rule.t = {
                   references = [
                     "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-175B.pdf";
                     if name = "RC4" then "CVE-2015-2808" 
-                    else if String.contains name "DES" then "CVE-2016-2183 (SWEET32)"
+                    else if contains_substring name "DES" then "CVE-2016-2183 (SWEET32)"
                     else "CWE-327";
                   ];
                 } :: !findings
             ) weak_ciphers;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -249,7 +249,7 @@ let insecure_ecc_curve_rule_v2 : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_constant (Pconst_string (s, _, _)) 
         | Pexp_construct ({txt = Lident s; _}, _) ->
@@ -292,11 +292,11 @@ let insecure_ecc_curve_rule_v2 : Rule.t = {
                   ];
                 } :: !findings
             ) curve_analysis;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

@@ -24,10 +24,10 @@ let weak_cipher_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_ident {txt; _} | Pexp_construct ({txt; _}, _) ->
-            let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path_str = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (pattern, name) ->
               if contains_substring path_str pattern then
                 findings := {
@@ -53,11 +53,11 @@ let weak_cipher_rule : Rule.t = {
                   ];
                 } :: !findings
             ) weak_ciphers;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -80,10 +80,10 @@ let weak_hash_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-            let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path_str = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (pattern, name, cve) ->
               if contains_substring path_str pattern && 
                  contains_substring path_str "hash" then
@@ -111,11 +111,11 @@ let weak_hash_rule : Rule.t = {
                   ];
                 } :: !findings
             ) weak_hashes;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -139,7 +139,7 @@ let insecure_ecc_curve_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_constant (Pconst_string (s, _, _)) 
         | Pexp_construct ({txt = Lident s; _}, _) ->
@@ -169,11 +169,11 @@ let insecure_ecc_curve_rule : Rule.t = {
                   ];
                 } :: !findings
             ) weak_curves;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -193,10 +193,10 @@ let small_block_cipher_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-            let path_str = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path_str = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if List.exists (fun cipher -> 
               contains_substring path_str cipher
             ) small_block_ciphers then
@@ -221,11 +221,11 @@ let small_block_cipher_rule : Rule.t = {
                   "https://sweet32.info/";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -242,10 +242,10 @@ let weak_key_exchange_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) 
-          when contains_substring (Longident.flatten txt |> String.concat "." |> String.lowercase_ascii) "dh" ->
+          when contains_substring (flatten_longident txt |> String.concat "." |> String.lowercase_ascii) "dh" ->
             List.iter (fun (label, arg) ->
               match label, arg.pexp_desc with
               | Asttypes.Labelled ("bits" | "size" | "modulus_size"), 
@@ -275,11 +275,11 @@ let weak_key_exchange_rule : Rule.t = {
                     } :: !findings
               | _ -> ()
             ) args;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -304,7 +304,7 @@ let legacy_tls_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_constant (Pconst_string (s, _, _)) ->
             let lower = String.lowercase_ascii s in
@@ -333,11 +333,11 @@ let legacy_tls_rule : Rule.t = {
                   ];
                 } :: !findings
             ) legacy_versions;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

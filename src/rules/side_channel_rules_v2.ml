@@ -47,19 +47,19 @@ let variable_time_comparison_rule_v2 : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! structure_item item () =
+      method! structure_item item =
         match item.pstr_desc with
         | Pstr_open {popen_expr = {pmod_desc = Pmod_ident {txt; _}; _}; _} ->
-            let module_name = Longident.flatten txt |> String.concat "." in
+            let module_name = flatten_longident txt |> String.concat "." in
             if List.mem module_name ["Cryptokit"; "Nocrypto"; "Mirage_crypto"; 
                                      "Tls"; "Hacl_star"; "Sodium"] then begin
               ctx.in_crypto_module <- true;
               ctx.crypto_imports <- module_name :: ctx.crypto_imports
             end;
-            super#structure_item item ()
-        | _ -> super#structure_item item ()
+            super#structure_item item
+        | _ -> super#structure_item item
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -69,7 +69,7 @@ let variable_time_comparison_rule_v2 : Rule.t = {
                   (* Enhanced detection: check if value comes from crypto operation *)
                   let from_crypto = match vb.pvb_expr.pexp_desc with
                     | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-                        let path = Longident.flatten txt |> String.concat "." in
+                        let path = flatten_longident txt |> String.concat "." in
                         List.exists (fun m -> String.starts_with ~prefix:m path) ctx.crypto_imports
                     | _ -> false
                   in
@@ -82,14 +82,14 @@ let variable_time_comparison_rule_v2 : Rule.t = {
                     sensitive_vars := (name, "secret_material") :: !sensitive_vars
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = op; _}; _}, args) ->
-            let op_name = Longident.flatten op |> String.concat "." in
+            let op_name = flatten_longident op |> String.concat "." in
             
             (* Skip if already using constant-time comparison *)
             if List.mem op_name constant_time_functions then
-              super#expression expr ()
+              super#expression expr
             else if List.mem op_name ["="; "<>"; "String.equal"; "String.compare"; 
                                       "Bytes.equal"; "compare"] then
               let involves_sensitive = List.exists (fun (_, arg) ->
@@ -132,11 +132,11 @@ let variable_time_comparison_rule_v2 : Rule.t = {
                     "USENIX Security 2024 - Statistical Timing Analysis";
                   ];
                 } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -157,7 +157,7 @@ let cache_timing_rule_v2 : Rule.t = {
       inherit Ast_traverse.iter as super
       
       (* Track array definitions to know their size *)
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -166,10 +166,10 @@ let cache_timing_rule_v2 : Rule.t = {
                   Hashtbl.add table_sizes name (List.length elements)
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
             
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             
             (* Check if we're in crypto code *)
             if contains_substring path "Cipher" || 
@@ -230,11 +230,11 @@ let cache_timing_rule_v2 : Rule.t = {
                     ];
                   } :: !findings;
             | _ -> ();
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -255,13 +255,13 @@ let branch_leak_rule_v2 : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
               match vb.pvb_pat.ppat_desc, vb.pvb_expr.pexp_desc with
               | Ppat_var {txt = name; _}, Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-                  let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+                  let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
                   (* Mark variable as tainted if it comes from crypto operation *)
                   if List.exists (fun src -> contains_substring path src) crypto_sources then
                     Hashtbl.add tainted_vars name "crypto_data"
@@ -270,7 +270,7 @@ let branch_leak_rule_v2 : Rule.t = {
                     Hashtbl.add tainted_vars name "named_secret"
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_ifthenelse (cond, then_branch, else_branch) ->
             let rec is_tainted = function
@@ -280,7 +280,7 @@ let branch_leak_rule_v2 : Rule.t = {
                   (* Check if it's error handling (common false positive) *)
                   let is_error_check = match e.pexp_desc with
                     | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-                        let path = Longident.flatten txt |> String.concat "." in
+                        let path = flatten_longident txt |> String.concat "." in
                         List.mem path ["Result.is_ok"; "Result.is_error"; "Option.is_some"; "Option.is_none"]
                     | _ -> false
                   in
@@ -335,11 +335,11 @@ let branch_leak_rule_v2 : Rule.t = {
                   "https://spectreattack.com/";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

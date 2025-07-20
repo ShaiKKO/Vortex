@@ -17,7 +17,7 @@ let variable_time_comparison_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -30,10 +30,10 @@ let variable_time_comparison_rule : Rule.t = {
                     sensitive_vars := name :: !sensitive_vars
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = op; _}; _}, args) ->
-            let op_name = Longident.flatten op |> String.concat "." in
+            let op_name = flatten_longident op |> String.concat "." in
             if List.mem op_name ["="; "<>"; "String.equal"; "String.compare"; 
                                  "Bytes.equal"; "compare"] then
               let involves_sensitive = List.exists (fun (_, arg) ->
@@ -66,11 +66,11 @@ let variable_time_comparison_rule : Rule.t = {
                     "https://codahale.com/a-lesson-in-timing-attacks/";
                   ];
                 } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -87,10 +87,10 @@ let non_constant_modexp_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             if List.mem path ["Z.powm"; "Big_int.power_big_int_positive_big_int"] ||
                (contains_substring path "pow" && 
                 contains_substring path "mod") then
@@ -117,11 +117,11 @@ let non_constant_modexp_rule : Rule.t = {
                   "https://eprint.iacr.org/2018/367";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -139,7 +139,7 @@ let cache_timing_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Lident "Array.get"; _}; _}, args)
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (Lident "Array", "get"); _}; _}, args) ->
@@ -178,11 +178,11 @@ let cache_timing_rule : Rule.t = {
                   "https://cr.yp.to/antiforgery/cachetiming-20050414.pdf";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -200,7 +200,7 @@ let branch_leak_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -211,7 +211,7 @@ let branch_leak_rule : Rule.t = {
                   secret_vars := name :: !secret_vars
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_ifthenelse (cond, _, _) ->
             let rec contains_secret = function
@@ -246,11 +246,11 @@ let branch_leak_rule : Rule.t = {
                   "https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-doychev.pdf";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -267,10 +267,10 @@ let power_analysis_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             (* Detect operations with data-dependent power consumption *)
             if (contains_substring path "multiplication" ||
                 contains_substring path "mult" ||
@@ -309,11 +309,11 @@ let power_analysis_rule : Rule.t = {
                   "DPA Contest";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 

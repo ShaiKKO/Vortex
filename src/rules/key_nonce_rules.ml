@@ -20,7 +20,7 @@ let hardcoded_key_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -55,11 +55,11 @@ let hardcoded_key_rule : Rule.t = {
                     } :: !findings
               | _ -> ()
             ) bindings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -76,10 +76,10 @@ let predictable_key_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             (* Check for weak random usage in key generation *)
             if (contains_substring path "Random" && 
                 not (contains_substring path "Cryptokit" || 
@@ -115,11 +115,11 @@ let predictable_key_rule : Rule.t = {
                   "NIST SP 800-90A Rev. 1";
                 ];
               } :: !findings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -137,7 +137,7 @@ let aead_nonce_reuse_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -148,10 +148,10 @@ let aead_nonce_reuse_rule : Rule.t = {
                   Hashtbl.add nonce_tracking name vb.pvb_expr
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             if (contains_substring path "gcm" || 
                 contains_substring path "chacha20" ||
                 contains_substring path "authenticate_encrypt") then
@@ -188,11 +188,11 @@ let aead_nonce_reuse_rule : Rule.t = {
                         } :: !findings
                 | _ -> ()
               ) args;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -209,7 +209,7 @@ let static_iv_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -242,11 +242,11 @@ let static_iv_rule : Rule.t = {
                   } :: !findings
               | _ -> ()
             ) bindings;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -268,10 +268,10 @@ let weak_kdf_iterations_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." |> String.lowercase_ascii in
+            let path = flatten_longident txt |> String.concat "." |> String.lowercase_ascii in
             List.iter (fun (kdf_name, min_value) ->
               if contains_substring path kdf_name then
                 List.iter (fun (label, arg) ->
@@ -306,11 +306,11 @@ let weak_kdf_iterations_rule : Rule.t = {
                   | _ -> ()
                 ) args
             ) min_iterations;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
@@ -328,7 +328,7 @@ let plaintext_key_storage_rule : Rule.t = {
     let visitor = object(self)
       inherit Ast_traverse.iter as super
       
-      method! expression expr () =
+      method! expression expr =
         match expr.pexp_desc with
         | Pexp_let (_, bindings, _) ->
             List.iter (fun vb ->
@@ -339,10 +339,10 @@ let plaintext_key_storage_rule : Rule.t = {
                   key_vars := name :: !key_vars
               | _ -> ()
             ) bindings;
-            super#expression expr ()
+            super#expression expr
         
         | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-            let path = Longident.flatten txt |> String.concat "." in
+            let path = flatten_longident txt |> String.concat "." in
             if List.mem path ["Out_channel.output_string"; "output_string"; 
                                "Out_channel.write"; "Stdlib.output"] then
               List.iter (fun (_, arg) ->
@@ -373,11 +373,11 @@ let plaintext_key_storage_rule : Rule.t = {
                     } :: !findings
                 | _ -> ()
               ) args;
-            super#expression expr ()
-        | _ -> super#expression expr ()
+            super#expression expr
+        | _ -> super#expression expr
     end in
     
-    visitor#structure ast ();
+    visitor#structure ast;
     !findings
 }
 
