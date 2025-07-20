@@ -331,7 +331,6 @@ module Context_manager = struct
       ) module_info.crypto_operations
     ) ctx.modules;
     
-    ctx.crypto_flows <- !flows;
     !flows
   
   let check_crypto_anti_patterns ctx =

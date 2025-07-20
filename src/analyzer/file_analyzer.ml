@@ -106,9 +106,9 @@ and analyze_functors ast import_ctx =
           (* Check if functor parameter is crypto-related *)
           (match param with
           | Unit -> ()
-          | Named (_, mtype) ->
-              match mtype with
-              | Some {pmty_desc = Pmty_ident {txt; _}; _} ->
+          | Named (_, Some mtype) ->
+                  (match mtype.pmty_desc with
+                  | Pmty_ident {txt; _} ->
                   let path = flatten_longident txt |> String.concat "." in
                   if List.exists (fun import ->
                     List.mem path import.Import_tracker.modules
@@ -128,8 +128,9 @@ and analyze_functors ast import_ctx =
                       suggestion = Some "Ensure functor application uses secure crypto implementations";
                       references = [];
                     } :: !findings
-              | _ -> ());
-          self#module_expr body ();
+                  | _ -> ())
+          | Named (_, None) -> ());
+          self#module_expr body
       
       | Pmod_apply (functor_expr, arg_expr) ->
           (* Track functor applications with crypto modules *)

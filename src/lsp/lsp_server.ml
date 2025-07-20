@@ -1,4 +1,5 @@
 open Lwt.Syntax
+open Lwt.Infix
 open Types
 
 module Lsp = struct
@@ -302,7 +303,7 @@ module Lsp = struct
                 (String.length resp_str) resp_str in
               Lwt_io.flush Lwt_io.stdout
           | None -> Lwt.return_unit)
-          >>= loop
+          >>= fun () -> loop ()
           
         with
         | e ->
