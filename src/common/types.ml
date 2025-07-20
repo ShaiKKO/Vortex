@@ -32,6 +32,8 @@ type crypto_vulnerability =
   | InsecureProtocol
   | SignatureBypass
   | ImproperValidation
+  (* Supply chain vulnerabilities *)
+  | SupplyChain
 
 type finding = {
   rule_id: string;
