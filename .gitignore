@@ -1,47 +1,75 @@
-# Build artifacts
+# OCaml build artifacts
 _build/
-*.exe
-*.o
-*.cmo
-*.cmi
+*.byte
+*.native
 *.cmx
-*.cma
+*.cmi
+*.cmo
 *.cmxa
+*.cma
 *.a
+*.o
+*.so
 
-# OPAM
+# Dune build system
+.merlin
+.merlin-conf
+dune-project.user
 _opam/
-*.install
 
 # Editor files
-.vscode/
-.idea/
 *.swp
 *.swo
 *~
-.DS_Store
+.vscode/
+.idea/
+*.iml
 
-# Test artifacts
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*.ml
+*.test
+
+# Logs and personal information
+*.log
+*.cache
+.dune/
+
+# Coverage reports
 _coverage/
 *.coverage
-bisect*.out
 
-# Release artifacts
-release/
-*.tar.gz
-*.tar.gz.sha256
-RELEASE_NOTES_*.md
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-*.log
-
-# Documentation
+# Documentation build
 _doc/
 *.odoc
 
-# Dune
-.merlin-conf/
-.merlin
+# Temporary files
+*.tmp
+tmp/
+temp/
+
+# Personal/sensitive data
+*.key
+*.pem
+*.cert
+*.password
+*.secret
+credentials/
+secrets/
+
+# OCaml REPL history
+.ocaml_history
+
+# Opam local switches
+_opam
+
+# Benchmarking results
+*.bench
+
+# Debug files
+*.debug
+core
+core.*
