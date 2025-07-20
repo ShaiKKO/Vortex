@@ -11,9 +11,12 @@ module Api_rules = Api_misuse_rules
 module Dependency = Dependency_rules
 module Cve = Cve_rules
 module Protocol = Protocol_rules
+module Sidechannel_advanced = Sidechannel_adv
 
 (* Force protocol rules module to load by accessing a value *)
 let _ = Protocol_rules.jwt_algorithm_confusion_rule
+(* Force advanced side-channel rules to load *)
+let _ = Sidechannel_adv.speculative_execution_rule
 
 (* Summary statistics *)
 let rule_statistics () =

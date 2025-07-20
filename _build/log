@@ -1,4 +1,4 @@
-# dune exec ocaml-crypto-linter -- tests/samples/vulnerable/test_proto_simple.ml
+# dune exec ocaml-crypto-linter -- tests/samples/vulnerable/test_sidechannel_adv.ml
 # OCAMLPARAM: unset
 # Shared cache: enabled-except-user-rules
 # Shared cache location: /Users/shaiiko/.cache/dune/db
@@ -13,4 +13,4 @@
 #  ; build_dir = In_build_dir "default"
 #  ; instrument_with = []
 #  }
-$ /Users/shaiiko/.opam/default/bin/ocamlc.opt -config > /var/folders/c_/dzy1cvrx7334qzrvkrdmfb800000gn/T/dune_ea15b7_output
+$ /Users/shaiiko/.opam/default/bin/ocamlc.opt -config > /var/folders/c_/dzy1cvrx7334qzrvkrdmfb800000gn/T/dune_8b9981_output
