@@ -1,5 +1,6 @@
 open Types
 open Analyzer_types
+open Utils
 
 module Parallel_engine = struct
   type work_item = {
@@ -152,7 +153,7 @@ module Parallel_engine = struct
             (* Analyze chunk *)
             let lexbuf = Lexing.from_string chunk in
             try
-              let ast = Parse.implementation lexbuf in
+              let ast = Ppxlib.Parse.implementation lexbuf in
               let chunk_findings = Ast_analyzer.analyze_structure ast in
               findings := !findings @ chunk_findings
             with _ -> ()
@@ -179,9 +180,9 @@ module Parallel_engine = struct
         List.map (fun file ->
           let priority = 
             if String.ends_with ~suffix:"_test.ml" file then Low
-            else if String.contains file "crypto" || 
-                    String.contains file "auth" ||
-                    String.contains file "security" then High
+            else if contains_substring file "crypto" || 
+                    contains_substring file "auth" ||
+                    contains_substring file "security" then High
             else Medium
           in
           
@@ -268,7 +269,7 @@ module Parallel_engine = struct
     (* Distribute work *)
     List.iteri (fun i sf ->
       let domain_idx = i mod num_domains in
-      Advanced.Work_stealing.add_work stealers.(domain_idx) sf.path
+      Advanced.Work_stealing.add_work stealers.(domain_idx) sf.Advanced.Priority_scheduler.path
     ) files_to_analyze;
     
     (* Spawn domains with work stealing *)
@@ -280,7 +281,7 @@ module Parallel_engine = struct
         let rec process () =
           match Advanced.Work_stealing.steal my_stealer with
           | Some file ->
-              let findings = Analyzer.analyze_single_file analyzer_state file in
+              let findings = File_analyzer.analyze_single_file analyzer_state file in
               Advanced.Incremental.cache_results file findings;
               process ()
           | None ->
@@ -291,7 +292,7 @@ module Parallel_engine = struct
                     if s != my_stealer then
                       match Advanced.Work_stealing.steal s with
                       | Some file ->
-                          let findings = Analyzer.analyze_single_file analyzer_state file in
+                          let findings = File_analyzer.analyze_single_file analyzer_state file in
                           Advanced.Incremental.cache_results file findings;
                           process ()
                       | None -> try_steal rest
@@ -308,7 +309,7 @@ module Parallel_engine = struct
     let rec process () =
       match Advanced.Work_stealing.steal my_stealer with
       | Some file ->
-          let findings = Analyzer.analyze_single_file analyzer_state file in
+          let findings = File_analyzer.analyze_single_file analyzer_state file in
           Advanced.Incremental.cache_results file findings;
           process ()
       | None -> ()

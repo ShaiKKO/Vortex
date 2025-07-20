@@ -1,5 +1,6 @@
 open Cmdliner
 open Ocaml_crypto_linter
+open Ocaml_crypto_linter.Types
 
 let analyze_files files output_format output_file enable_semgrep =
   let start_time = Unix.gettimeofday () in

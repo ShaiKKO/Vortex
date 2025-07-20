@@ -61,9 +61,8 @@ let analyze_file filename =
                 findings := ("SIDE001", expr.pexp_loc) :: !findings
             | _ -> ())
             
-        | _ -> ()
+        | _ -> ();
         
-        ();
         super#expression expr
     end in
     
@@ -97,7 +96,7 @@ let output_arg =
     ~doc:"Output file")
 
 let analyze_cmd =
-  let analyze files format output =
+  let analyze files format _output =
     let total_findings = ref 0 in
     
     if format = "json" then begin
@@ -118,7 +117,7 @@ let analyze_cmd =
       Printf.printf "\nTotal findings: %d\n" !total_findings;
     end;
     
-    `Ok ()
+    `Ok 0
   in
   
   let doc = "Analyze OCaml code for cryptographic vulnerabilities (simplified)" in
