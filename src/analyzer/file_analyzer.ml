@@ -52,7 +52,7 @@ let rec analyze_single_file state file_path =
       
       (* Interprocedural analysis if enabled *)
       if state.config.enable_interprocedural then begin
-        let ppx_ast = Ppxlib_ast.Selected_ast.Of_ocaml.copy_structure ast in
+        (* Skip AST conversion - use ast directly *)
         (* Run enhanced API misuse rules with interprocedural analysis *)
         let interprocedural_rules = [
           Api_misuse_rules_v2.cbc_without_mac_rule_v2;
@@ -60,7 +60,7 @@ let rec analyze_single_file state file_path =
           Api_misuse_rules_v2.key_reuse_rule_v2;
         ] in
         let interprocedural_findings =
-          List.concat_map (fun rule -> rule.Rule_engine.Rule.check ppx_ast) interprocedural_rules
+          List.concat_map (fun rule -> rule.Rule_engine.Rule.check ast) interprocedural_rules
         in
         file_findings := !file_findings @ interprocedural_findings
       end

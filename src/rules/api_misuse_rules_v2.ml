@@ -3,6 +3,8 @@ open Types
 open Rule_engine
 open Ppxlib
 open Interprocedural
+open Interprocedural.Call_graph
+open Interprocedural.Function_summary
 open Utils
 
 (* API006: CBC Without MAC - Enhanced with interprocedural analysis *)
@@ -129,7 +131,7 @@ let encrypt_then_mac_rule_v2 : Rule.t = {
                 rule_id = "API002";
                 severity = Error;
                 message = "MAC-then-Encrypt pattern detected (should be Encrypt-then-MAC)";
-                vulnerability = ApiMisuse;
+                vulnerability = InsecureMode "MAC-then-Encrypt";
                 location = {
                   file = loc1.loc_start.pos_fname;
                   line = loc1.loc_start.pos_lnum;

@@ -238,7 +238,7 @@ let rsa_timing_rule : Rule.t = {
       method! expression expr =
         match expr.pexp_desc with
         | Pexp_apply ({pexp_desc = Pexp_ident {txt = Ldot (m, ("decrypt" | "sign")); _}; _}, _) 
-          when contains_substring (String.lowercase_ascii (Longident.flatten m |> String.concat ".")) "rsa" ->
+          when contains_substring (String.lowercase_ascii (flatten_longident m |> String.concat ".")) "rsa" ->
             findings := {
               rule_id = "CVE_2018_0737";
               severity = Warning;

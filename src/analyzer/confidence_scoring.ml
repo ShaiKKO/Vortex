@@ -220,7 +220,7 @@ module Enhanced_finding = struct
     let color = Confidence.color_of_level enhanced.confidence in
     let reset = "\027[0m" in
     
-    Printf.fprintf fmt "%s[P%d]%s %s [%s] %s\n"
+    Format.fprintf fmt "%s[P%d]%s %s [%s] %s@."
       color
       enhanced.priority
       reset
@@ -232,13 +232,13 @@ module Enhanced_finding = struct
       (Confidence.string_of_level enhanced.confidence)
       enhanced.finding.message;
     
-    Printf.fprintf fmt "  Location: %s:%d:%d\n"
+    Format.fprintf fmt "  Location: %s:%d:%d@."
       enhanced.finding.location.file
       enhanced.finding.location.line
       enhanced.finding.location.column;
     
     if enhanced.risk_score > 8.0 then
-      Printf.fprintf fmt "  ⚠️  HIGH RISK - Immediate attention required\n"
+      Format.fprintf fmt "  ⚠️  HIGH RISK - Immediate attention required@."
 end
 
 (* Machine learning data collection for improving confidence *)

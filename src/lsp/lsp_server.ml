@@ -150,23 +150,23 @@ module Lsp = struct
         ("method", `String "textDocument/publishDiagnostics");
         ("params", `Assoc [
           ("uri", `String uri);
-          ("diagnostics", `List (List.map (fun d ->
+          ("diagnostics", `List (List.map (fun (d : Protocol.diagnostic) ->
             `Assoc [
               ("range", `Assoc [
                 ("start", `Assoc [
-                  ("line", `Int d.Protocol.range.start.line);
-                  ("character", `Int d.Protocol.range.start.character);
+                  ("line", `Int d.range.start.line);
+                  ("character", `Int d.range.start.character);
                 ]);
                 ("end", `Assoc [
-                  ("line", `Int d.Protocol.range.end_.line);
-                  ("character", `Int d.Protocol.range.end_.character);
+                  ("line", `Int d.range.end_.line);
+                  ("character", `Int d.range.end_.character);
                 ]);
               ]);
               ("severity", match d.severity with 
                 | Some Protocol.Error -> `Int 1
-                | Some Warning -> `Int 2
-                | Some Information -> `Int 3
-                | Some Hint -> `Int 4
+                | Some Protocol.Warning -> `Int 2
+                | Some Protocol.Information -> `Int 3
+                | Some Protocol.Hint -> `Int 4
                 | None -> `Null);
               ("code", match d.code with Some c -> `String c | None -> `Null);
               ("source", match d.source with Some s -> `String s | None -> `Null);
@@ -199,16 +199,16 @@ module Lsp = struct
                 `Assoc [
                   ("range", `Assoc [
                     ("start", `Assoc [
-                      ("line", `Int d.Protocol.range.start.line);
-                      ("character", `Int d.Protocol.range.start.character);
+                      ("line", `Int d.range.start.line);
+                      ("character", `Int d.range.start.character);
                     ]);
                     ("end", `Assoc [
-                      ("line", `Int d.Protocol.range.end_.line);
-                      ("character", `Int d.Protocol.range.end_.character);
+                      ("line", `Int d.range.end_.line);
+                      ("character", `Int d.range.end_.character);
                     ]);
                   ]);
                   ("severity", match d.severity with 
-                    | Some Protocol.Error -> `Int 1
+                    | Some Error -> `Int 1
                     | Some Warning -> `Int 2
                     | Some Information -> `Int 3
                     | Some Hint -> `Int 4

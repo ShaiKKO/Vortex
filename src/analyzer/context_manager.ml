@@ -1,5 +1,6 @@
 open Types
 open Utils
+open Ppxlib
 
 module Context_manager = struct
   type module_info = {
@@ -129,8 +130,11 @@ module Context_manager = struct
           ) info bindings
       
       | Pstr_module {pmb_name; pmb_expr; _} ->
-          let sub_module = self#analyze_module pmb_name.txt pmb_expr in
-          { info with exports = (pmb_name.txt, Module RegularModule) :: info.exports }
+          (match pmb_name.txt with
+          | Some name ->
+              let sub_module = self#analyze_module name pmb_expr in
+              { info with exports = (name, Module RegularModule) :: info.exports }
+          | None -> info)
       
       | Pstr_type (_, type_decls) ->
           List.fold_left (fun info decl ->
@@ -202,7 +206,7 @@ module Context_manager = struct
     method private infer_value_type expr =
       match expr.pexp_desc with
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-          let path = Longident.flatten txt |> String.concat "." in
+          let path = flatten_longident txt |> String.concat "." in
           if contains_substring path "key" then CryptoKey
           else if contains_substring path "nonce" || 
                   contains_substring path "iv" then Nonce
@@ -215,7 +219,7 @@ module Context_manager = struct
     method private is_crypto_related expr =
       match expr.pexp_desc with
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, _) ->
-          let path = Longident.flatten txt |> String.concat "." in
+          let path = flatten_longident txt |> String.concat "." in
           List.exists (fun pattern ->
             contains_substring (String.lowercase_ascii path) pattern
           ) ["crypto"; "cipher"; "hash"; "sign"; "encrypt"; "decrypt"; 
@@ -225,7 +229,7 @@ module Context_manager = struct
     method private extract_crypto_operation name expr =
       match expr.pexp_desc with
       | Pexp_apply ({pexp_desc = Pexp_ident {txt; _}; _}, args) ->
-          let path = Longident.flatten txt |> String.concat "." in
+          let path = flatten_longident txt |> String.concat "." in
           let op_type = 
             if contains_substring path "encrypt" then 
               Some (Encryption path)
@@ -270,7 +274,7 @@ module Context_manager = struct
     method private extract_module_path expr =
       match expr.pmod_desc with
       | Pmod_ident {txt; _} ->
-          Longident.flatten txt |> String.concat "."
+          flatten_longident txt |> String.concat "."
       | _ -> "unknown"
   end
   
