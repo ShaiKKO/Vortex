@@ -195,7 +195,7 @@ module Lsp = struct
             ("method", `String "textDocument/publishDiagnostics");
             ("params", `Assoc [
               ("uri", `String uri);
-              ("diagnostics", `List (List.map (fun d ->
+              ("diagnostics", `List (List.map (fun (d : Protocol.diagnostic) ->
                 `Assoc [
                   ("range", `Assoc [
                     ("start", `Assoc [

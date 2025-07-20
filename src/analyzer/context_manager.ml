@@ -289,11 +289,12 @@ module Context_manager = struct
   
   let analyze_inter_module_flows ctx =
     let flows = ref [] in
+    let deps = ref ctx.dependencies in
     
     (* Build dependency graph *)
     Hashtbl.iter (fun name info ->
       List.iter (fun import ->
-        ctx.dependencies <- (name, import) :: ctx.dependencies
+        deps := (name, import) :: !deps
       ) info.imports
     ) ctx.modules;
     

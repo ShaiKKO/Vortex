@@ -100,7 +100,7 @@ and analyze_functors ast import_ctx =
   let visitor = object(self)
     inherit Ast_traverse.iter as super
     
-    method! module_expr mexpr () =
+    method! module_expr mexpr =
       match mexpr.pmod_desc with
       | Pmod_functor (param, body) ->
           (* Check if functor parameter is crypto-related *)
@@ -133,9 +133,9 @@ and analyze_functors ast import_ctx =
       
       | Pmod_apply (functor_expr, arg_expr) ->
           (* Track functor applications with crypto modules *)
-          super#module_expr mexpr ()
+          super#module_expr mexpr
       
-      | _ -> super#module_expr mexpr ()
+      | _ -> super#module_expr mexpr
   end in
   
   visitor#structure ast ();

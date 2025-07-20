@@ -4,7 +4,7 @@
  (name ocaml_crypto_linter)
  (public_name ocaml-crypto-linter)
  (modules :standard \ parallel_stubs)
- (flags (:standard -w -26-27-33))
+ (flags (:standard -w -8-11-26-27-33))
  (libraries
   compiler-libs.common
   ppxlib
